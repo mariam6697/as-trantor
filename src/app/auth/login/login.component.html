@@ -1,0 +1,22 @@
+<div class="login-screen">
+    <mat-card style="min-width: 200px; max-width: 300px; margin-left: 1rem; margin-right: 1rem; min-height: 200px; margin-top: -100px; padding: 2rem;">
+        <h1>Inicia sesión</h1>
+        <form [formGroup]="loginForm" (ngSubmit)="login()">
+
+            <mat-form-field appearance="fill" style="width: 100%">
+                <mat-label>Correo</mat-label>
+                <input matInput formControlName="email">
+            </mat-form-field>
+
+            <mat-form-field appearance="fill" style="width: 100%">
+                <mat-label>Contraseña</mat-label>
+                <input matInput [type]="hide ? 'password' : 'text'" formControlName="password">
+                <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
+                    [attr.aria-pressed]="hide">
+                    <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                </button>
+            </mat-form-field>
+            <button mat-raised-button color="primary" type="submit">Entrar</button>
+        </form>
+    </mat-card>
+</div>

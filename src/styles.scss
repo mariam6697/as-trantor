@@ -1,4 +1,171 @@
 /* You can add global styles to this file, and also import other style files */
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+@use "@angular/material" as mat;
+@include mat.core();
+@import "./app/shared/mat-table-responsive/mat-table-responsive.directive.scss";
+
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+
+$as-primary: (
+  50: #e0f0fe,
+  100: #b3dafc,
+  200: #80c1fa,
+  300: #4da8f7,
+  400: #2695f6,
+  500: #0082f4,
+  600: #007af3,
+  700: #006ff1,
+  800: #0065ef,
+  900: #0052ec,
+  A100: #ffffff,
+  A200: #e0e8ff,
+  A400: #adc4ff,
+  A700: #93b2ff,
+  contrast: (
+    50: #000000,
+    100: #000000,
+    200: #000000,
+    300: #000000,
+    400: #ffffff,
+    500: #ffffff,
+    600: #ffffff,
+    700: #ffffff,
+    800: #ffffff,
+    900: #ffffff,
+    A100: #000000,
+    A200: #000000,
+    A400: #000000,
+    A700: #000000,
+  ),
+);
+
+$as-accent: (
+  50: #e8e9eb,
+  100: #c6c8cc,
+  200: #a1a3ab,
+  300: #7b7e89,
+  400: #5e626f,
+  500: #424656,
+  600: #3c3f4f,
+  700: #333745,
+  800: #2b2f3c,
+  900: #1d202b,
+  A100: #748bff,
+  A200: #4160ff,
+  A400: #0e36ff,
+  A700: #0029f3,
+  contrast: (
+    50: #000000,
+    100: #000000,
+    200: #000000,
+    300: #ffffff,
+    400: #ffffff,
+    500: #ffffff,
+    600: #ffffff,
+    700: #ffffff,
+    800: #ffffff,
+    900: #ffffff,
+    A100: #000000,
+    A200: #ffffff,
+    A400: #ffffff,
+    A700: #ffffff,
+  ),
+);
+
+$as-warn: (
+  50: #fce9ee,
+  100: #f8c7d4,
+  200: #f4a2b7,
+  300: #ef7c9a,
+  400: #eb6085,
+  500: #e8446f,
+  600: #e53e67,
+  700: #e2355c,
+  800: #de2d52,
+  900: #d81f40,
+  A100: #ffffff,
+  A200: #ffdce2,
+  A400: #ffa9b6,
+  A700: #ff90a1,
+  contrast: (
+    50: #000000,
+    100: #000000,
+    200: #000000,
+    300: #000000,
+    400: #000000,
+    500: #ffffff,
+    600: #ffffff,
+    700: #ffffff,
+    800: #ffffff,
+    900: #ffffff,
+    A100: #000000,
+    A200: #000000,
+    A400: #000000,
+    A700: #000000,
+  ),
+);
+
+$as-success: (
+  50: #e5f8f2,
+  100: #bfecdf,
+  200: #95e0ca,
+  300: #6ad4b5,
+  400: #4acaa5,
+  500: #2ac195,
+  600: #25bb8d,
+  700: #1fb382,
+  800: #19ab78,
+  900: #0f9e67,
+  A100: #ceffea,
+  A200: #9bffd5,
+  A400: #68ffbf,
+  A700: #4effb4,
+  contrast: (
+    50: #000000,
+    100: #000000,
+    200: #000000,
+    300: #000000,
+    400: #000000,
+    500: #000000,
+    600: #000000,
+    700: #000000,
+    800: #ffffff,
+    900: #ffffff,
+    A100: #000000,
+    A200: #000000,
+    A400: #000000,
+    A700: #000000,
+  ),
+);
+
+$primary: mat.define-palette($as-primary);
+$accent: mat.define-palette($as-accent);
+$warn: mat.define-palette($as-warn);
+$success: mat.define-palette($as-success);
+
+$as-theme: mat.define-light-theme(
+  (
+    color: (
+      primary: $primary,
+      accent: $accent,
+      warn: $warn
+    ),
+  )
+);
+
+@include mat.core-theme($as-theme);
+
+// @include mat.button-theme($as-theme);
+// @include mat.chips-theme($as-theme);
+// @include mat.toolbar-theme($as-theme);
+
+@include mat.all-component-themes($as-theme);
+

@@ -1,0 +1,46 @@
+<mat-drawer-container>
+    <mat-drawer #drawer class="as-sidenav" mode="side">
+        <mat-list>
+            <mat-list-item>¡Hola, {{user.name}}!</mat-list-item>
+            <mat-divider></mat-divider>
+
+            <span *ngFor="let element of menuElements">
+                <mat-list-item>
+                    <button [routerLink]="element.path" mat-button [class]="'list-button' + getActivePath(element)">
+                        <mat-icon>{{element.icon}}</mat-icon>
+                        {{element.label}}
+                    </button>
+                </mat-list-item>
+            </span>
+
+            <mat-list-item>
+                <button (click)="logout()" mat-button class="list-button">
+                    <mat-icon>exit_to_app</mat-icon>
+                    <span>Cerrar sesión</span>
+                </button>
+            </mat-list-item>
+        </mat-list>
+
+    </mat-drawer>
+
+    <div class="as-sidenav-content">
+        <mat-toolbar color="primary">
+            <button mat-icon-button class="as-icon" mat-button (click)="drawer.toggle()">
+                <mat-icon>menu</mat-icon>
+            </button>
+            <span>AS Trantor</span>
+            <span class="as-spacer"></span>
+            <button mat-icon-button class="as-icon favorite-icon">
+                <mat-icon>favorite</mat-icon>
+            </button>
+            <button mat-icon-button class="as-icon">
+                <mat-icon>share</mat-icon>
+            </button>
+        </mat-toolbar>
+        <div class="as-container">
+            <router-outlet></router-outlet>
+        </div>
+
+    </div>
+
+</mat-drawer-container>

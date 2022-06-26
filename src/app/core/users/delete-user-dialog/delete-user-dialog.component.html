@@ -1,0 +1,14 @@
+<h1 mat-dialog-title>Eliminar usuario</h1>
+<h3 mat-dialog-title>{{user.name}} {{user.surname}}</h3>
+<div mat-dialog-content>
+    ¿Está seguro de querer eliminar al usuario? Este es un proceso irreversible
+</div>
+<div mat-dialog-actions>
+    <div style="display: flex; justify-content: flex-start; align-items: center; padding: 0.5rem; flex: 1;">
+        <mat-spinner *ngIf="loading" diameter="20"></mat-spinner>
+    </div>
+    <button mat-button (click)="onNoClick()" [disabled]="loading">Cancelar</button>
+    <button mat-raised-button color="primary" (click)="delete()" [disabled]="loading" cdkFocusInitial>
+        Sí, eliminar
+    </button>
+</div>

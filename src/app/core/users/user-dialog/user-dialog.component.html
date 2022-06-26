@@ -1,0 +1,47 @@
+<h1 mat-dialog-title>{{actionString}} usuario</h1>
+<div mat-dialog-content>
+    <form [formGroup]="userForm">
+
+        <mat-form-field appearance="fill" style="width: 100%">
+            <mat-label>Nombre</mat-label>
+            <input matInput formControlName="name">
+        </mat-form-field>
+
+        <mat-form-field appearance="fill" style="width: 100%">
+            <mat-label>Apellido</mat-label>
+            <input matInput formControlName="surname">
+        </mat-form-field>
+
+        <mat-form-field appearance="fill" style="width: 100%">
+            <mat-label>Correo</mat-label>
+            <input matInput formControlName="email">
+        </mat-form-field>
+
+        <mat-form-field *ngIf="action == 'create'" appearance="fill" style="width: 100%">
+            <mat-label>Contraseña</mat-label>
+            <input matInput [type]="hide ? 'password' : 'text'" formControlName="password">
+            <button mat-icon-button matSuffix [disabled]="loading" (click)="hide = !hide"
+                [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+                <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+            </button>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill" style="width: 100%">
+            <mat-label>Role</mat-label>
+            <select matNativeControl matInput formControlName="role" required>
+                <option value="admin">Administrador</option>
+                <option value="maintainer">Mantenedor</option>
+            </select>
+        </mat-form-field>
+
+    </form>
+</div>
+<div mat-dialog-actions>
+    <div style="display: flex; justify-content: flex-start; align-items: center; padding: 0.5rem; flex: 1;">
+        <mat-spinner *ngIf="loading" diameter="20"></mat-spinner>
+    </div>
+    <button mat-button (click)="onNoClick()" [disabled]="loading">Cancelar</button>
+    <button mat-raised-button color="primary" (click)="save()" [disabled]="loading" cdkFocusInitial>
+        Guardar
+    </button>
+</div>
