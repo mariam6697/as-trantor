@@ -2,22 +2,22 @@
 <div mat-dialog-content>
     <form [formGroup]="userForm">
 
-        <mat-form-field appearance="fill" style="width: 100%">
+        <mat-form-field appearance="outline" style="width: 100%">
             <mat-label>Nombre</mat-label>
             <input matInput formControlName="name">
         </mat-form-field>
 
-        <mat-form-field appearance="fill" style="width: 100%">
+        <mat-form-field appearance="outline" style="width: 100%">
             <mat-label>Apellido</mat-label>
             <input matInput formControlName="surname">
         </mat-form-field>
 
-        <mat-form-field appearance="fill" style="width: 100%">
+        <mat-form-field appearance="outline" style="width: 100%">
             <mat-label>Correo</mat-label>
             <input matInput formControlName="email">
         </mat-form-field>
 
-        <mat-form-field *ngIf="action == 'create'" appearance="fill" style="width: 100%">
+        <mat-form-field *ngIf="action == 'create'" appearance="outline" style="width: 100%">
             <mat-label>Contraseña</mat-label>
             <input matInput [type]="hide ? 'password' : 'text'" formControlName="password">
             <button mat-icon-button matSuffix [disabled]="loading" (click)="hide = !hide"
@@ -26,7 +26,7 @@
             </button>
         </mat-form-field>
 
-        <mat-form-field appearance="fill" style="width: 100%">
+        <mat-form-field appearance="outline" style="width: 100%">
             <mat-label>Role</mat-label>
             <select matNativeControl matInput formControlName="role" required>
                 <option value="admin">Administrador</option>

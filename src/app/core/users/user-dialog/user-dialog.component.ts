@@ -7,8 +7,8 @@ import {
 } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import User from 'src/app/models/user.model';
-import { UserService } from 'src/app/services/user.service';
+import User from 'src/models/user.model';
+import { UserService } from 'src/services/user.service';
 import { UsersComponent } from '../users.component';
 
 @Component({

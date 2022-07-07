@@ -169,3 +169,14 @@ $as-theme: mat.define-light-theme(
 
 @include mat.all-component-themes($as-theme);
 
+// Main 
+.as-spacer {
+  flex: 1 1 auto;
+}
+
+.as-header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  min-width: 300px;
+}

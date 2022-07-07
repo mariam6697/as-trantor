@@ -7,8 +7,8 @@ import {
 } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, Router } from '@angular/router';
-import { LocalDataService } from 'src/app/services/local-data.service';
-import { UserService } from 'src/app/services/user.service';
+import { LocalDataService } from 'src/services/local-data.service';
+import { UserService } from 'src/services/user.service';
 
 @Component({
   selector: 'app-login',

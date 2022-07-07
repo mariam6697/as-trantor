@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import axios from 'axios';
 import { LocalDataService } from './local-data.service';
-import User from '../models/user.model';
+import User from '.././models/user.model';
 
 @Injectable({
   providedIn: 'root',

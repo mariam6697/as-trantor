@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatDialog } from '@angular/material/dialog';
-import User from 'src/app/models/user.model';
-import { UserService } from 'src/app/services/user.service';
+import User from 'src/models/user.model';
+import { UserService } from 'src/services/user.service';
 import { UserDialogComponent } from './user-dialog/user-dialog.component';
 import { PageEvent } from '@angular/material/paginator';
 import { DeleteUserDialogComponent } from './delete-user-dialog/delete-user-dialog.component';
-import { LocalDataService } from 'src/app/services/local-data.service';
+import { LocalDataService } from 'src/services/local-data.service';
 
 @Component({
   selector: 'app-users',
@@ -46,7 +46,6 @@ export class UsersComponent implements OnInit {
     this.page = event!.pageIndex + 1;
     this.limit = event!.pageSize;
     this.getUsers(this.page, this.limit);
-    // return event!;
   };
 
   getUsers = async (
