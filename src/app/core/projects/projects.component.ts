@@ -5,6 +5,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import Project from 'src/models/project.model';
 import { LocalDataService } from 'src/services/local-data.service';
 import { ProjectService } from 'src/services/project.service';
+import { ProjectDialogComponent } from './project-dialog/project-dialog.component';
 
 @Component({
   selector: 'app-projects',
@@ -71,19 +72,16 @@ export class ProjectsComponent implements OnInit {
     }
   };
 
-  openDialog = (action: string, project?: Project): void => {
-    // const dialogRef = this._dialog.open(UserDialogComponent, {
-    //   width: '400px',
-    //   data: {
-    //     action,
-    //     user,
-    //   },
-    //   disableClose: true,
-    // });
+  openDialog = (): void => {
+    const dialogRef = this._dialog.open(ProjectDialogComponent, {
+      width: '400px',
+      data: {},
+      disableClose: true,
+    });
 
-    // dialogRef.afterClosed().subscribe(() => {
-    //   this.getUsers(this.page, this.limit);
-    // });
+    dialogRef.afterClosed().subscribe(() => {
+      this.getProjects(this.page, this.limit);
+    });
   };
 
 }

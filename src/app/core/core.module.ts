@@ -23,6 +23,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { MatTableResponsiveModule } from '../shared/mat-table-responsive/mat-table-responsive.module';
 import { DeleteUserDialogComponent } from './users/delete-user-dialog/delete-user-dialog.component';
 import { MatChipsModule } from '@angular/material/chips';
+import { ProjectDialogComponent } from './projects/project-dialog/project-dialog.component';
 
 @NgModule({
   declarations: [
@@ -31,6 +32,7 @@ import { MatChipsModule } from '@angular/material/chips';
     ProjectsComponent,
     UserDialogComponent,
     DeleteUserDialogComponent,
+    ProjectDialogComponent,
   ],
   imports: [
     CommonModule,

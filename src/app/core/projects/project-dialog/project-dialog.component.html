@@ -1,0 +1,38 @@
+<h1 mat-dialog-title>Crear proyecto</h1>
+<div mat-dialog-content>
+    <form [formGroup]="projectForm">
+
+        <mat-form-field appearance="outline" style="width: 100%">
+            <mat-label>Nombre</mat-label>
+            <input matInput formControlName="name">
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" style="width: 100%">
+            <mat-label>Descripción</mat-label>
+            <input matInput formControlName="description">
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" style="width: 100%">
+            <mat-label>Año</mat-label>
+            <input matInput formControlName="year">
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" style="width: 100%">
+            <mat-label>Semestre</mat-label>
+            <select matNativeControl matInput formControlName="semester" required>
+                <option value="1">Primero</option>
+                <option value="2">Segundo</option>
+            </select>
+        </mat-form-field>
+
+    </form>
+</div>
+<div mat-dialog-actions>
+    <div style="display: flex; justify-content: flex-start; align-items: center; padding: 0.5rem; flex: 1;">
+        <mat-spinner *ngIf="loading" diameter="20"></mat-spinner>
+    </div>
+    <button mat-button (click)="onNoClick()" [disabled]="loading">Cancelar</button>
+    <button mat-raised-button color="primary" (click)="save()" [disabled]="loading" cdkFocusInitial>
+        Guardar
+    </button>
+</div>
