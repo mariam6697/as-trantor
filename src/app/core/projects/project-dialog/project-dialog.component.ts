@@ -1,8 +1,8 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import {
-  FormBuilder,
-  FormControl,
-  FormGroup,
+  UntypedFormBuilder,
+  UntypedFormControl,
+  UntypedFormGroup,
   Validators,
 } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
@@ -17,7 +17,7 @@ import { UsersComponent } from '../../users/users.component';
   styleUrls: ['./project-dialog.component.scss'],
 })
 export class ProjectDialogComponent implements OnInit {
-  projectForm: FormGroup;
+  projectForm: UntypedFormGroup;
   action: string;
   actionString: string;
   hide: boolean = true;
@@ -27,18 +27,18 @@ export class ProjectDialogComponent implements OnInit {
   constructor(
     public dialogRef: MatDialogRef<UsersComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
-    private fb: FormBuilder,
+    private fb: UntypedFormBuilder,
     private projectService: ProjectService,
     private _snackBar: MatSnackBar
   ) {
     this.projectForm = this.fb.group({
-      name: new FormControl('', [Validators.required, Validators.minLength(5)]),
-      description: new FormControl('', [
+      name: new UntypedFormControl('', [Validators.required, Validators.minLength(5)]),
+      description: new UntypedFormControl('', [
         Validators.required,
         Validators.minLength(5),
       ]),
-      year: new FormControl(1960, [Validators.required, Validators.minLength(4), Validators.maxLength(4)]),
-      semester: new FormControl('', [Validators.required]),
+      year: new UntypedFormControl(1960, [Validators.required, Validators.minLength(4), Validators.maxLength(4)]),
+      semester: new UntypedFormControl('', [Validators.required]),
     });
   }
 

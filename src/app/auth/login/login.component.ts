@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {
-  FormBuilder,
-  FormControl,
-  FormGroup,
+  UntypedFormBuilder,
+  UntypedFormControl,
+  UntypedFormGroup,
   Validators,
 } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
@@ -16,22 +16,22 @@ import { UserService } from 'src/services/user.service';
   styleUrls: ['./login.component.scss'],
 })
 export class LoginComponent implements OnInit {
-  loginForm: FormGroup;
+  loginForm: UntypedFormGroup;
   hide: boolean = true;
 
   constructor(
-    private fb: FormBuilder,
+    private fb: UntypedFormBuilder,
     private localDataService: LocalDataService,
     private userService: UserService,
     private _snackBar: MatSnackBar,
     private router: Router
   ) {
     this.loginForm = this.fb.group({
-      email: new FormControl('', [
+      email: new UntypedFormControl('', [
         Validators.required,
         Validators.minLength(5),
       ]),
-      password: new FormControl('', [
+      password: new UntypedFormControl('', [
         Validators.required,
         Validators.minLength(5),
       ]),

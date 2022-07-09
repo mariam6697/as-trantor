@@ -1,8 +1,8 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import {
-  FormBuilder,
-  FormControl,
-  FormGroup,
+  UntypedFormBuilder,
+  UntypedFormControl,
+  UntypedFormGroup,
   Validators,
 } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
@@ -17,7 +17,7 @@ import { UsersComponent } from '../users.component';
   styleUrls: ['./user-dialog.component.scss'],
 })
 export class UserDialogComponent implements OnInit {
-  userForm: FormGroup;
+  userForm: UntypedFormGroup;
   action: string;
   actionString: string;
   hide: boolean = true;
@@ -27,28 +27,28 @@ export class UserDialogComponent implements OnInit {
   constructor(
     public dialogRef: MatDialogRef<UsersComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
-    private fb: FormBuilder,
+    private fb: UntypedFormBuilder,
     private userService: UserService,
     private _snackBar: MatSnackBar
   ) {
     this.userForm = this.fb.group({
-      name: new FormControl('', [Validators.required, Validators.minLength(5)]),
-      surname: new FormControl('', [
+      name: new UntypedFormControl('', [Validators.required, Validators.minLength(5)]),
+      surname: new UntypedFormControl('', [
         Validators.required,
         Validators.minLength(5),
       ]),
-      email: new FormControl('', [
+      email: new UntypedFormControl('', [
         Validators.required,
         Validators.minLength(5),
       ]),
-      role: new FormControl('', [Validators.required]),
+      role: new UntypedFormControl('', [Validators.required]),
     });
     this.action = data.action;
     if (this.action === 'create') {
       this.actionString = 'Crear';
       this.userForm.setControl(
         'password',
-        new FormControl('', [Validators.required, Validators.minLength(5)])
+        new UntypedFormControl('', [Validators.required, Validators.minLength(5)])
       );
     } else if (this.action === 'edit') {
       this.actionString = 'Editar';
@@ -62,7 +62,7 @@ export class UserDialogComponent implements OnInit {
       };
       this.userForm.setControl(
         'enabled',
-        new FormControl('', [Validators.required, Validators.minLength(5)])
+        new UntypedFormControl('', [Validators.required, Validators.minLength(5)])
       );
       this.userForm.setValue(user);
     }
