@@ -1,8 +1,8 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import {
-  UntypedFormBuilder,
-  UntypedFormControl,
-  UntypedFormGroup,
+  FormBuilder,
+  FormControl,
+  FormGroup,
   Validators,
 } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
@@ -17,29 +17,48 @@ import { UsersComponent } from '../../users/users.component';
   styleUrls: ['./project-dialog.component.scss'],
 })
 export class ProjectDialogComponent implements OnInit {
-  projectForm: UntypedFormGroup;
-  action: string;
-  actionString: string;
-  hide: boolean = true;
+  projectForm: FormGroup;
   userId: string;
   _loading: boolean = false;
+  years: (startYear: any) => string[];
+  yearOptions: string[] = [];
 
   constructor(
     public dialogRef: MatDialogRef<UsersComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
-    private fb: UntypedFormBuilder,
+    private fb: FormBuilder,
     private projectService: ProjectService,
     private _snackBar: MatSnackBar
   ) {
     this.projectForm = this.fb.group({
-      name: new UntypedFormControl('', [Validators.required, Validators.minLength(5)]),
-      description: new UntypedFormControl('', [
+      name: new FormControl<string>('', [
         Validators.required,
         Validators.minLength(5),
       ]),
-      year: new UntypedFormControl(1960, [Validators.required, Validators.minLength(4), Validators.maxLength(4)]),
-      semester: new UntypedFormControl('', [Validators.required]),
+      description: new FormControl<string>('', [
+        Validators.required,
+        Validators.minLength(5),
+      ]),
+      year: new FormControl<string>('2020', [
+        Validators.required,
+        Validators.minLength(4),
+        Validators.maxLength(4),
+      ]),
+      semester: new FormControl<number>(1, [Validators.required]),
     });
+
+    this.years = (startYear: number) => {
+      let currentYear: number = new Date().getFullYear();
+      let years: string[] = [];
+      startYear = startYear || 1980;
+      while (startYear <= currentYear) {
+        let year: number = startYear++;
+        years.push(year.toString());
+      }
+      return years;
+    };
+    
+    this.yearOptions = this.years(2000);
   }
 
   get loading(): boolean {
@@ -56,7 +75,7 @@ export class ProjectDialogComponent implements OnInit {
     }
   }
 
-  ngOnInit = (): void => {};
+  ngOnInit(): void  {};
 
   onNoClick = (): void => {
     this.dialogRef.close();
@@ -81,6 +100,8 @@ export class ProjectDialogComponent implements OnInit {
       } finally {
         this.loading = false;
       }
+    } else {
+      this.projectForm.markAllAsTouched();
     }
   };
 }

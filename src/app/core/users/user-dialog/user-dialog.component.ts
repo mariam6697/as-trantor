@@ -1,8 +1,8 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import {
-  UntypedFormBuilder,
-  UntypedFormControl,
-  UntypedFormGroup,
+  FormBuilder,
+  FormControl,
+  FormGroup,
   Validators,
 } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
@@ -17,7 +17,7 @@ import { UsersComponent } from '../users.component';
   styleUrls: ['./user-dialog.component.scss'],
 })
 export class UserDialogComponent implements OnInit {
-  userForm: UntypedFormGroup;
+  userForm: FormGroup;
   action: string;
   actionString: string;
   hide: boolean = true;
@@ -27,28 +27,28 @@ export class UserDialogComponent implements OnInit {
   constructor(
     public dialogRef: MatDialogRef<UsersComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
-    private fb: UntypedFormBuilder,
+    private fb: FormBuilder,
     private userService: UserService,
     private _snackBar: MatSnackBar
   ) {
     this.userForm = this.fb.group({
-      name: new UntypedFormControl('', [Validators.required, Validators.minLength(5)]),
-      surname: new UntypedFormControl('', [
+      name: new FormControl<string>('', [Validators.required, Validators.minLength(5)]),
+      surname: new FormControl<string>('', [
         Validators.required,
         Validators.minLength(5),
       ]),
-      email: new UntypedFormControl('', [
+      email: new FormControl<string>('', [
         Validators.required,
         Validators.minLength(5),
       ]),
-      role: new UntypedFormControl('', [Validators.required]),
+      role: new FormControl<string>('', [Validators.required]),
     });
     this.action = data.action;
     if (this.action === 'create') {
       this.actionString = 'Crear';
       this.userForm.setControl(
         'password',
-        new UntypedFormControl('', [Validators.required, Validators.minLength(5)])
+        new FormControl<string>('', [Validators.required, Validators.minLength(5)])
       );
     } else if (this.action === 'edit') {
       this.actionString = 'Editar';
@@ -62,7 +62,7 @@ export class UserDialogComponent implements OnInit {
       };
       this.userForm.setControl(
         'enabled',
-        new UntypedFormControl('', [Validators.required, Validators.minLength(5)])
+        new FormControl<string>('', [Validators.required, Validators.minLength(5)])
       );
       this.userForm.setValue(user);
     }
@@ -76,14 +76,13 @@ export class UserDialogComponent implements OnInit {
     this._loading = value;
 
     if (this._loading) {
-      // this.userForm.get('name')?.disable();
       this.userForm.disable();
     } else {
       this.userForm.enable();
     }
   }
 
-  ngOnInit = (): void => {};
+  ngOnInit(): void {};
 
   onNoClick = (): void => {
     this.dialogRef.close();
@@ -117,6 +116,8 @@ export class UserDialogComponent implements OnInit {
       } finally {
         this.loading = false;
       }
+    } else {
+      this.userForm.markAllAsTouched();
     }
   };
 }

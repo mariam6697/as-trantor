@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { PageEvent } from '@angular/material/paginator';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { Router } from '@angular/router';
 import Project from 'src/models/project.model';
 import { LocalDataService } from 'src/services/local-data.service';
 import { ProjectService } from 'src/services/project.service';
@@ -31,7 +32,8 @@ export class ProjectsComponent implements OnInit {
   constructor(private projectService: ProjectService,
     private localDataService: LocalDataService,
     private _snackBar: MatSnackBar,
-    private _dialog: MatDialog) { }
+    private _dialog: MatDialog,
+    private router: Router) { }
 
   ngOnInit(): void {
     this.loggedInUserId = this.localDataService.readData('user').id;
@@ -55,7 +57,6 @@ export class ProjectsComponent implements OnInit {
       if (response.status === 'ok') {
         this.projects = response.data.projects;
         this.totalItems = response.data.totalItems;
-        console.log("this.projects", this.projects)
       }
     } catch (error: any) {
       this.projects = [];
@@ -82,6 +83,10 @@ export class ProjectsComponent implements OnInit {
     dialogRef.afterClosed().subscribe(() => {
       this.getProjects(this.page, this.limit);
     });
+  };
+
+  goToDetail = (project: Project): void => {
+    this.router.navigate([`projects/${project._id}`]);
   };
 
 }

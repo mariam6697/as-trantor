@@ -4,11 +4,12 @@
   display: flex;
   background-color: #e5f0ff;
   min-height: 100vh;
+  min-width: 400px;
   flex-direction: column;
 }
 
 .as-sidenav {
-  padding: 20px;
+  padding: 0.5rem;
   background-color: white;
   min-height: 100vh;
   width: 250px;

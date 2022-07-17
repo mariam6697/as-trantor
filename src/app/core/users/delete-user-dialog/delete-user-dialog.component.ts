@@ -33,7 +33,7 @@ export class DeleteUserDialogComponent implements OnInit {
     this._loading = value;
   }
 
-  ngOnInit = (): void => {};
+  ngOnInit(): void {};
 
   onNoClick = (): void => {
     this.dialogRef.close();

@@ -27,8 +27,8 @@
     <ng-container matColumnDef="actions">
         <th mat-header-cell *matHeaderCellDef> </th>
         <td mat-cell *matCellDef="let element">
-            <button class="ma-1" [disabled]="element._id === loggedInUserId" mat-icon-button mat-raised-button color="warn"
-                class="as-icon">
+            <button class="ma-1" [disabled]="element._id === loggedInUserId" mat-icon-button color="primary"
+                class="as-icon" (click)="goToDetail(element)">
                 <mat-icon>info</mat-icon>
             </button>
         </td>

@@ -5,12 +5,12 @@ import Project from 'src/models/project.model';
 import { LocalDataService } from './local-data.service';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class ProjectService {
   apiUrl: string = environment.apiUrl;
 
-  constructor() { }
+  constructor() {}
 
   create = async (projectData: Project): Promise<any> => {
     const accessToken: string = LocalDataService.getAccessToken();
@@ -22,6 +22,18 @@ export class ProjectService {
     });
     const data: any = response.data;
     return data;
+  };
+
+  get = async (projectId: string): Promise<Project> => {
+    const accessToken: string = LocalDataService.getAccessToken();
+    const url: string = `${this.apiUrl}/core/projects/${projectId}`;
+    const response: any = await axios.get(url, {
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+      },
+    });
+    const project: Project = response.data.data;
+    return project;
   };
 
   getAll = async (
@@ -40,5 +52,17 @@ export class ProjectService {
       },
     });
     return response.data;
+  };
+
+  update = async (projectId: string, projectData: Project): Promise<any> => {
+    const accessToken: string = LocalDataService.getAccessToken();
+    const url: string = `${this.apiUrl}/core/projects/${projectId}`;
+    const response: any = await axios.put(url, projectData, {
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+      },
+    });
+    const data: any = response.data;
+    return data;
   };
 }
