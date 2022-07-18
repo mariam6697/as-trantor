@@ -1,0 +1,20 @@
+.as-extra-image-container {
+  background-color: rgba(0, 0, 0, 0.025);
+  padding: 0.25rem;
+  border-radius: 5px;
+  margin-bottom: 0.25rem;
+  height: 5rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+
+  .as-extra-image {
+    height: 5rem;
+    width: 7.5rem;
+    object-fit: cover;
+    object-position: 50% 50%;
+  }
+  .as-extra-detail {
+    margin: 0.25rem;
+  }
+}

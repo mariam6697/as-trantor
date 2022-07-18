@@ -13,8 +13,7 @@ body {
   font-family: Roboto, "Helvetica Neue", sans-serif;
 }
 
-
-$as-primary: (
+$as-accent: (
   50: #e0f0fe,
   100: #b3dafc,
   200: #80c1fa,
@@ -47,7 +46,7 @@ $as-primary: (
   ),
 );
 
-$as-accent: (
+$as-primary: (
   50: #e8e9eb,
   100: #c6c8cc,
   200: #a1a3ab,
@@ -156,7 +155,7 @@ $as-theme: mat.define-light-theme(
     color: (
       primary: $primary,
       accent: $accent,
-      warn: $warn
+      warn: $warn,
     ),
   )
 );
@@ -169,7 +168,7 @@ $as-theme: mat.define-light-theme(
 
 @include mat.all-component-themes($as-theme);
 
-// Main 
+// Main
 .as-spacer {
   flex: 1 1 auto;
 }

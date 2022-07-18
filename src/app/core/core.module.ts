@@ -17,7 +17,14 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatCardModule } from '@angular/material/card';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
-import { ClipboardButtonComponent, ClipboardOptions, MarkdownModule, MarkedOptions, MarkedRenderer } from 'ngx-markdown';
+import {
+  ClipboardButtonComponent,
+  ClipboardOptions,
+  MarkdownModule,
+  MarkedOptions,
+} from 'ngx-markdown';
+import { NgxMatFileInputModule } from '@angular-material-components/file-input';
+import { MatExpansionModule } from '@angular/material/expansion';
 
 import { CoreRoutingModule } from './core-routing.module';
 import { CoreComponent } from './core.component';
@@ -28,7 +35,10 @@ import { MatTableResponsiveModule } from '../shared/mat-table-responsive/mat-tab
 import { DeleteUserDialogComponent } from './users/delete-user-dialog/delete-user-dialog.component';
 import { ProjectDialogComponent } from './projects/project-dialog/project-dialog.component';
 import { ProjectDetailComponent } from './projects/project-detail/project-detail.component';
-import { HttpClient } from '@angular/common/http';
+import {
+  DeleteImageDialog,
+  ExtraImagesComponent,
+} from './projects/project-detail/extra-images/extra-images.component';
 
 @NgModule({
   declarations: [
@@ -39,6 +49,8 @@ import { HttpClient } from '@angular/common/http';
     DeleteUserDialogComponent,
     ProjectDialogComponent,
     ProjectDetailComponent,
+    ExtraImagesComponent,
+    DeleteImageDialog,
   ],
   imports: [
     CommonModule,
@@ -73,6 +85,8 @@ import { HttpClient } from '@angular/common/http';
       },
       sanitize: SecurityContext.NONE,
     }),
+    NgxMatFileInputModule,
+    MatExpansionModule,
   ],
   exports: [MatTableResponsiveModule],
 })

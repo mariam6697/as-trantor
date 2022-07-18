@@ -1,0 +1,11 @@
+<div *ngFor="let image of extraImages">
+  <div class="as-extra-image-container">
+    <div class="as-extra-detail">
+      <div>Archivo: {{image._id}}{{image.extension}}</div>
+      <div>Tipo: {{image.type}}</div>
+      <div><button style="padding: 0.25rem; height: 1.75rem; line-height: unset; font-size: 0.75rem;" mat-flat-button
+          color="accent" (click)="openDeleteDialog(image)">Eliminar</button></div>
+    </div>
+    <img class="as-extra-image" *ngIf="image.safeFile" [src]="image.safeFile" />
+  </div>
+</div>

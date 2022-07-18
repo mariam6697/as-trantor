@@ -1,84 +1,111 @@
 <div class="as-header">
   <h1 *ngIf="!project || !project.name">Detalle del proyecto</h1>
   <h1 *ngIf="project && project.name">{{ project.name }}</h1>
-  <div>
-    <mat-slide-toggle
-      labelPosition="before"
-      color="primary"
-      [disabled]="loading"
-      [checked]="editable"
-      (change)="editable = !editable"
-    >
-      <h3 style="margin-bottom: 0">Editar</h3></mat-slide-toggle
-    >
-  </div>
+  <!-- <div>
+    <mat-slide-toggle labelPosition="before" color="primary" [disabled]="loading" [checked]="editable"
+      (change)="editable = !editable">
+      <h3 style="margin-bottom: 0">Editar</h3>
+    </mat-slide-toggle>
+  </div> -->
 </div>
 
-<mat-card
-  *ngIf="loading"
-  class="mat-elevation-z0"
-  style="
+<mat-card *ngIf="loading" class="mat-elevation-z0" style="
     min-height: 70vh;
     min-width: 300px;
     display: flex;
     justify-content: center;
     align-items: center;
-  "
->
+  ">
   <mat-spinner *ngIf="loading" diameter="50"></mat-spinner>
 </mat-card>
 
-<mat-card
-  *ngIf="!loading && project"
-  class="mat-elevation-z0"
-  style="min-height: 70vh; min-width: 300px"
->
-  <div class="responsive-row">
-    <div class="half-row">
-      <h2>Detalles principales</h2>
-      <form [formGroup]="projectForm" (ngSubmit)="save()">
-        <mat-form-field appearance="outline" style="width: 100%">
-          <mat-label>Nombre</mat-label>
-          <input matInput formControlName="name" />
-        </mat-form-field>
-
-        <mat-form-field appearance="outline" style="width: 100%">
-          <mat-label>Año</mat-label>
-          <select matNativeControl matInput formControlName="year" required>
-            <option *ngFor="let year of yearOptions" [value]="year">
-              {{ year }}
-            </option>
-          </select>
-        </mat-form-field>
-
-        <mat-form-field appearance="outline" style="width: 100%">
-          <mat-label>Semestre</mat-label>
-          <select matNativeControl matInput formControlName="semester" required>
-            <option value="1">Primero</option>
-            <option value="2">Segundo</option>
-          </select>
-        </mat-form-field>
-
-        <mat-form-field appearance="outline" style="width: 100%">
-          <mat-label>Descripción</mat-label>
-          <textarea
-            matInput
-            cdkTextareaAutosize
-            cdkAutosizeMinRows="2"
-            cdkAutosizeMaxRows="5"
-            formControlName="description"
-          ></textarea>
-        </mat-form-field>
-
-        <button mat-flat-button color="primary" type="submit" [disabled]="!editable">Guardar</button>
-      </form>
-    </div>
-    <div class="half-row">
-      <h2>Vista previa descripción</h2>
-      <div class="md-container">
-        <markdown emoji [data]="projectForm.get('description')!.value">
-        </markdown>
+<mat-accordion *ngIf="!loading && project">
+  <mat-expansion-panel class="mat-elevation-z0" style="border-bottom: 1px solid #f5f5f5" expanded="true">
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        <h1 style="margin-bottom: 0; font-size: 1.3rem;">Detalles principales</h1>
+      </mat-panel-title>
+    </mat-expansion-panel-header>
+    <div class="responsive-row">
+      <div class="half-row">
+        <div class="as-header">
+          <h3>Detalle del proyecto</h3>
+          <div>
+            <mat-slide-toggle labelPosition="before" color="primary" [disabled]="loading" [checked]="editable"
+              (change)="editable = !editable">
+              <h4 style="margin-bottom: 0">Editar</h4>
+            </mat-slide-toggle>
+          </div>
+        </div>
+        <form [formGroup]="projectForm" (ngSubmit)="save()">
+          <mat-form-field appearance="outline" style="width: 100%">
+            <mat-label>Nombre</mat-label>
+            <input matInput formControlName="name" />
+          </mat-form-field>
+          <mat-form-field appearance="outline" style="width: 100%">
+            <mat-label>Año</mat-label>
+            <select matNativeControl matInput formControlName="year" required>
+              <option *ngFor="let year of yearOptions" [value]="year">
+                {{ year }}
+              </option>
+            </select>
+          </mat-form-field>
+          <mat-form-field appearance="outline" style="width: 100%">
+            <mat-label>Semestre</mat-label>
+            <select matNativeControl matInput formControlName="semester" required>
+              <option value="1">Primero</option>
+              <option value="2">Segundo</option>
+            </select>
+          </mat-form-field>
+          <mat-form-field appearance="outline" style="width: 100%">
+            <mat-label>Descripción</mat-label>
+            <textarea matInput cdkTextareaAutosize cdkAutosizeMinRows="2" cdkAutosizeMaxRows="5"
+              formControlName="description"></textarea>
+          </mat-form-field>
+          <button mat-flat-button color="primary" type="submit" [disabled]="!editable">Guardar</button>
+        </form>
+      </div>
+      <div class="half-row">
+        <h3>Vista previa descripción</h3>
+        <div class="md-container">
+          <markdown emoji [data]="projectForm.get('description')!.value">
+          </markdown>
+        </div>
       </div>
     </div>
-  </div>
-</mat-card>
+  </mat-expansion-panel>
+
+  <mat-expansion-panel class="mat-elevation-z0">
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        <h1 style="margin-bottom: 0; font-size: 1.3rem;">Recursos graficos</h1>
+      </mat-panel-title>
+    </mat-expansion-panel-header>
+    <div class="responsive-row">
+      <div class="half-row">
+        <h3>Imagen principal</h3>
+        <mat-form-field appearance="outline" style="width: 65%">
+          <mat-label>Imagen principal</mat-label>
+          <ngx-mat-file-input [formControl]="mainImageControl" [accept]="accept" [color]="color">
+          </ngx-mat-file-input>
+        </mat-form-field>
+        <button style="margin-left: 0.5rem;" mat-flat-button color="primary" (click)="saveMainImage()">Guardar</button>
+        <div><img *ngIf="mainImage" class="as-main-image" [src]="mainImage" /></div>
+      </div>
+      <div class="half-row">
+        <h3>Imagenes extra</h3>
+        <div>
+          <mat-form-field appearance="outline" style="width: 65%">
+            <mat-label>Imagen adicional</mat-label>
+            <ngx-mat-file-input [formControl]="extraImageControl" [accept]="accept" [color]="color">
+            </ngx-mat-file-input>
+          </mat-form-field>
+          <button style="margin-left: 0.5rem;" mat-flat-button color="primary"
+            (click)="saveExtraImage()">Guardar</button>
+
+        </div>
+        <app-extra-images (load-project)="getProjectData()" [extra-images]="extraImages"></app-extra-images>
+      </div>
+    </div>
+  </mat-expansion-panel>
+</mat-accordion>

@@ -1,5 +1,4 @@
 import { Component, Inject, OnInit } from '@angular/core';
-import { UntypedFormBuilder } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import User from 'src/models/user.model';
@@ -18,7 +17,6 @@ export class DeleteUserDialogComponent implements OnInit {
   constructor(
     public dialogRef: MatDialogRef<UsersComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
-    private fb: UntypedFormBuilder,
     private userService: UserService,
     private _snackBar: MatSnackBar
   ) {
@@ -33,7 +31,7 @@ export class DeleteUserDialogComponent implements OnInit {
     this._loading = value;
   }
 
-  ngOnInit(): void {};
+  ngOnInit(): void {}
 
   onNoClick = (): void => {
     this.dialogRef.close();

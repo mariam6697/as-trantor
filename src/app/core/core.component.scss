@@ -1,10 +1,8 @@
-
-
 .as-sidenav-content {
   display: flex;
   background-color: #e5f0ff;
   min-height: 100vh;
-  min-width: 400px;
+  min-width: 300px;
   flex-direction: column;
 }
 
@@ -24,7 +22,6 @@
   flex-direction: row !important;
   justify-content: flex-start !important;
   align-items: center !important;
-  
 
   mat-icon {
     margin-right: 0.5rem;
@@ -36,5 +33,5 @@
 }
 
 .as-container {
-    margin: 1rem;
+  margin: 1rem;
 }

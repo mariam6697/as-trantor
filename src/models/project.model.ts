@@ -1,4 +1,5 @@
 import Category from './category.model';
+import CustomFile from './file.model';
 
 export default interface Project {
   _id?: string;
@@ -8,6 +9,8 @@ export default interface Project {
   year?: string;
   categories?: any[] | Category[];
   updates?: ProjectUpdate[];
+  mainImage?: CustomFile;
+  extraImages?: CustomFile[];
 }
 
 export interface ProjectUpdate {
