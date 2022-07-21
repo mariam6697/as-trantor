@@ -5,6 +5,7 @@ export default interface Project {
   _id?: string;
   name: string;
   description?: string;
+  visible?: boolean;
   semester?: Semester;
   year?: string;
   categories?: any[] | Category[];

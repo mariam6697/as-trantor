@@ -1,9 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { CoreComponent } from './core.component';
-import { ProjectDetailComponent } from './projects/project-detail/project-detail.component';
-import { ProjectsComponent } from './projects/projects.component';
-import { UsersComponent } from './users/users.component';
 
 const routes: Routes = [
   {
@@ -17,15 +14,13 @@ const routes: Routes = [
       },
       {
         path: 'users',
-        component: UsersComponent,
+        loadChildren: () =>
+          import('./users/users.module').then((m) => m.UsersModule),
       },
       {
         path: 'projects',
-        component: ProjectsComponent,
-      },
-      {
-        path: 'projects/:projectId',
-        component: ProjectDetailComponent,
+        loadChildren: () =>
+          import('./projects/projects.module').then((m) => m.ProjectsModule),
       },
     ],
   },

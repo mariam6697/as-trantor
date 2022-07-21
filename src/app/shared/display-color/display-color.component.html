@@ -1,0 +1,4 @@
+<div class="display-color-container" *ngIf="hexColor.length === 6">
+  <div class="color-container" [ngStyle]="{backgroundColor: '#' + hexColor}"></div>
+  <div class="color-code">#{{hexColor}}</div>
+</div>

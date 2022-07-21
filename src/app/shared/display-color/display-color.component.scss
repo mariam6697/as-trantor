@@ -1,0 +1,22 @@
+.display-color-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+
+  .color-container {
+    width: 1rem;
+    height: 1rem;
+    border-radius: 50%;
+    border: 0.5px solid #c6c6c6;
+    margin: 0.35rem;
+  }
+
+  .color-code {
+    font-family: "Courier New", Courier, monospace;
+    font-size: 0.75rem;
+    background-color: #f5f5f5;
+    border-radius: 4px;
+    border: 0.5px solid #c6c6c6;
+    padding: 0 0.35rem;
+  }
+}

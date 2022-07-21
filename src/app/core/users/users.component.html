@@ -1,12 +1,7 @@
 <div class="as-header">
   <h1>Usuarios</h1>
   <div>
-    <button
-      primary
-      mat-flat-button
-      color="primary"
-      (click)="openDialog('create')"
-    >
+    <button primary mat-flat-button color="primary" (click)="openDialog('create')">
       Crear usuario
     </button>
   </div>
@@ -46,9 +41,7 @@
   <ng-container matColumnDef="enabled">
     <th mat-header-cell *matHeaderCellDef>Habilitado</th>
     <td mat-cell *matCellDef="let element">
-      <mat-icon color="primary" *ngIf="element.enabled === true"
-        >check</mat-icon
-      >
+      <mat-icon color="primary" *ngIf="element.enabled === true">check</mat-icon>
       <mat-icon color="warn" *ngIf="element.enabled === false">close</mat-icon>
     </td>
   </ng-container>
@@ -56,22 +49,11 @@
   <ng-container matColumnDef="actions">
     <th mat-header-cell *matHeaderCellDef></th>
     <td mat-cell *matCellDef="let element">
-      <button
-        class="ma-1"
-        [disabled]="element._id === loggedInUserId"
-        mat-icon-button
-        color="warn"
-        class="as-icon"
-        (click)="openDeleteDialog(element)"
-      >
+      <button class="ma-1" [disabled]="element._id === loggedInUserId" mat-icon-button color="warn" class="as-icon"
+        (click)="openDeleteDialog(element)">
         <mat-icon>delete_forever</mat-icon>
       </button>
-      <button
-        mat-icon-button
-        color="accent"
-        class="as-icon"
-        (click)="openDialog('edit', element)"
-      >
+      <button mat-icon-button color="accent" class="as-icon" (click)="openDialog('edit', element)">
         <mat-icon>edit</mat-icon>
       </button>
     </td>
@@ -80,12 +62,5 @@
   <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
   <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
 </table>
-<mat-paginator
-  style="min-width: 300px"
-  [pageSize]="limit"
-  [length]="totalItems"
-  [pageIndex]="page - 1"
-  [pageSizeOptions]="[5, 10, 20]"
-  (page)="updateUsersList($event)"
-  showFirstLastButtons
-></mat-paginator>
+<mat-paginator style="min-width: 300px" [pageSize]="limit" [length]="totalItems" [pageIndex]="page - 1"
+  [pageSizeOptions]="[5, 10, 20]" (page)="updateUsersList($event)" showFirstLastButtons></mat-paginator>

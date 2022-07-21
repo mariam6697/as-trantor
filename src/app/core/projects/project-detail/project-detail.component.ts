@@ -143,7 +143,7 @@ export class ProjectDetailComponent implements OnInit {
       if (this.project.mainImage) {
         this.setMainImage(this.project.mainImage);
       }
-      if (this.project.extraImages && this.project.extraImages.length > 0) {
+      if (this.project.extraImages) {
         this.setExtraImages(this.project.extraImages);
       }
       this.projectForm.setValue({

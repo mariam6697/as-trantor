@@ -32,7 +32,10 @@ export class UserDialogComponent implements OnInit {
     private _snackBar: MatSnackBar
   ) {
     this.userForm = this.fb.group({
-      name: new FormControl<string>('', [Validators.required, Validators.minLength(5)]),
+      name: new FormControl<string>('', [
+        Validators.required,
+        Validators.minLength(5),
+      ]),
       surname: new FormControl<string>('', [
         Validators.required,
         Validators.minLength(5),
@@ -48,21 +51,27 @@ export class UserDialogComponent implements OnInit {
       this.actionString = 'Crear';
       this.userForm.setControl(
         'password',
-        new FormControl<string>('', [Validators.required, Validators.minLength(5)])
+        new FormControl<string>('', [
+          Validators.required,
+          Validators.minLength(5),
+        ])
       );
     } else if (this.action === 'edit') {
       this.actionString = 'Editar';
       this.userId = data.user._id;
       const user: User = {
-        name: data.user.name,
-        surname: data.user.surname,
-        email: data.user.email,
-        role: data.user.role,
-        enabled: data.user.enabled,
+        name: data.user.name ?? '',
+        surname: data.user.surname ?? '',
+        email: data.user.email ?? '',
+        role: data.user.role ?? 'maintainer',
+        enabled: data.user.enabled ?? false,
       };
       this.userForm.setControl(
         'enabled',
-        new FormControl<string>('', [Validators.required, Validators.minLength(5)])
+        new FormControl<string>('', [
+          Validators.required,
+          Validators.minLength(5),
+        ])
       );
       this.userForm.setValue(user);
     }
@@ -82,7 +91,7 @@ export class UserDialogComponent implements OnInit {
     }
   }
 
-  ngOnInit(): void {};
+  ngOnInit(): void {}
 
   onNoClick = (): void => {
     this.dialogRef.close();
