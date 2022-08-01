@@ -32,6 +32,25 @@
   }
 }
 
+.sub-element-button {
+  margin-left: -8px;
+  margin-right: -16px;
+  width: calc(100% + 32px);
+  text-align: start;
+  display: flex !important;
+  flex-direction: row !important;
+  justify-content: flex-start !important;
+  align-items: center !important;
+
+  mat-icon {
+    margin-right: 0.5rem;
+  }
+
+  &.active {
+    background-color: #fafafa;
+  }
+}
+
 .as-container {
   margin: 1rem;
 }

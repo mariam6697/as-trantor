@@ -1,41 +1,71 @@
 <div class="as-header">
-    <h1>Proyectos</h1>
-    <div><button primary mat-flat-button color="primary" (click)="openDialog()">Crear proyecto</button></div>
+  <h1>Proyectos</h1>
+  <div>
+    <button primary mat-flat-button color="primary" (click)="openDialog()">
+      Crear proyecto
+    </button>
+  </div>
 </div>
-<table mat-table matTableResponsive [dataSource]="projects" style="width: 100%;">
-    <ng-container matColumnDef="name">
-        <th mat-header-cell *matHeaderCellDef> Nombre </th>
-        <td mat-cell *matCellDef="let element"> {{element.name}} </td>
-    </ng-container>
+<table mat-table matTableResponsive [dataSource]="projects" style="width: 100%">
+  <ng-container matColumnDef="name">
+    <th mat-header-cell *matHeaderCellDef>Nombre</th>
+    <td mat-cell *matCellDef="let element">
+      <a [routerLink]="element._id">{{ element.name }}</a>
+    </td>
+  </ng-container>
 
-    <ng-container matColumnDef="year">
-        <th mat-header-cell *matHeaderCellDef> Año </th>
-        <td mat-cell *matCellDef="let element"> {{element.year}} </td>
-    </ng-container>
+  <ng-container matColumnDef="year">
+    <th mat-header-cell *matHeaderCellDef>Año</th>
+    <td mat-cell *matCellDef="let element">{{ element.year }}</td>
+  </ng-container>
 
-    <ng-container matColumnDef="semester">
-        <th mat-header-cell *matHeaderCellDef> Semestre </th>
-        <td mat-cell *matCellDef="let element"> {{element.semester}} </td>
-    </ng-container>
+  <ng-container matColumnDef="semester">
+    <th mat-header-cell *matHeaderCellDef>Semestre</th>
+    <td mat-cell *matCellDef="let element">{{ element.semester }}</td>
+  </ng-container>
 
-    <ng-container matColumnDef="categories">
-        <th mat-header-cell *matHeaderCellDef> Categorías
-        </th>
-        <td mat-cell *matCellDef="let element"> {{element.categories}} </td>
-    </ng-container>
+  <ng-container matColumnDef="categories">
+    <th mat-header-cell *matHeaderCellDef>Categorías</th>
+    <td mat-cell *matCellDef="let element">
+      <mat-chip-list style="grid-column: 1">
+        <mat-chip
+          *ngFor="let category of element.categories"
+          [ngStyle]="{
+            'background-color': '#' + category.backgroundHexColor,
+            color: '#' + category.textHexColor
+          }"
+        >
+          {{ category.label }}
+        </mat-chip>
+      </mat-chip-list>
+    </td>
+  </ng-container>
 
-    <ng-container matColumnDef="actions">
-        <th mat-header-cell *matHeaderCellDef> </th>
-        <td mat-cell *matCellDef="let element">
-            <button class="ma-1" [disabled]="element._id === loggedInUserId" mat-icon-button color="primary"
-                class="as-icon" (click)="goToDetail(element)">
-                <mat-icon>info</mat-icon>
-            </button>
-        </td>
-    </ng-container>
+  <!-- <ng-container matColumnDef="actions">
+    <th mat-header-cell *matHeaderCellDef></th>
+    <td mat-cell *matCellDef="let element">
+      <button
+        class="ma-1"
+        [disabled]="element._id === loggedInUserId"
+        mat-icon-button
+        color="primary"
+        class="as-icon"
+        (click)="goToDetail(element)"
+      >
+        <mat-icon>info</mat-icon>
+      </button>
+    </td>
+  </ng-container> -->
 
-    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
 </table>
-<mat-paginator style="min-width: 300px;" [pageSize]="limit" [length]="totalItems" [pageIndex]="page - 1"
-    [pageSizeOptions]="[5, 10, 20]" (page)="updateProjectsList($event)" showFirstLastButtons></mat-paginator>
+<mat-paginator
+  style="min-width: 300px"
+  [pageSize]="limit"
+  [length]="totalItems"
+  [pageIndex]="page - 1"
+  [pageSizeOptions]="[5, 10, 20]"
+  (page)="updateProjectsList($event)"
+  showFirstLastButtons
+></mat-paginator>

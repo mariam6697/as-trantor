@@ -11,7 +11,7 @@ import { ProjectDialogComponent } from './project-dialog/project-dialog.componen
 @Component({
   selector: 'app-projects',
   templateUrl: './projects.component.html',
-  styleUrls: ['./projects.component.scss']
+  styleUrls: ['./projects.component.scss'],
 })
 export class ProjectsComponent implements OnInit {
   projects: Project[] = [];
@@ -25,15 +25,17 @@ export class ProjectsComponent implements OnInit {
     'year',
     'semester',
     'categories',
-    'actions'
+    // 'actions'
   ];
   loggedInUserId: string = '';
 
-  constructor(private projectService: ProjectService,
+  constructor(
+    private projectService: ProjectService,
     private localDataService: LocalDataService,
     private _snackBar: MatSnackBar,
     private _dialog: MatDialog,
-    private router: Router) { }
+    private router: Router
+  ) {}
 
   ngOnInit(): void {
     this.loggedInUserId = this.localDataService.readData('user').id;
@@ -53,7 +55,11 @@ export class ProjectsComponent implements OnInit {
   ): Promise<void> => {
     try {
       this.loading = true;
-      const response: any = await this.projectService.getAll(page, limit, search);
+      const response: any = await this.projectService.getAll(
+        page,
+        limit,
+        search
+      );
       if (response.status === 'ok') {
         this.projects = response.data.projects;
         this.totalItems = response.data.totalItems;
@@ -88,5 +94,4 @@ export class ProjectsComponent implements OnInit {
   goToDetail = (project: Project): void => {
     this.router.navigate([`projects/${project._id}`]);
   };
-
 }

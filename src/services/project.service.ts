@@ -26,7 +26,7 @@ export class ProjectService {
 
   get = async (projectId: string): Promise<Project> => {
     const accessToken: string = LocalDataService.getAccessToken();
-    const url: string = `${this.apiUrl}/core/projects/${projectId}`;
+    const url: string = `${this.apiUrl}/admin/projects/${projectId}`;
     const response: any = await axios.get(url, {
       headers: {
         Authorization: `Bearer ${accessToken}`,
@@ -42,7 +42,7 @@ export class ProjectService {
     search?: string
   ): Promise<any> => {
     const accessToken: string = LocalDataService.getAccessToken();
-    let url: string = `${this.apiUrl}/core/projects?page=${page}&limit=${limit}`;
+    let url: string = `${this.apiUrl}/admin/projects?page=${page}&limit=${limit}`;
     if (search) {
       url += `&search=${search}`;
     }

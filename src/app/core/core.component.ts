@@ -17,11 +17,15 @@ export class CoreComponent implements OnInit {
       label: 'Usuarios',
       icon: 'group',
       path: 'users',
+      children: [],
     },
     {
       label: 'Projectos',
       icon: 'rocket_launch',
       path: 'projects',
+      children: [
+        { label: 'Categorías', icon: 'category', path: 'projects/categories' },
+      ],
     },
   ];
 
@@ -35,8 +39,8 @@ export class CoreComponent implements OnInit {
     this.checkUser();
   }
 
-  getActivePath = (element: any): string => {
-    return `/${element.path}` === this.router.url ? ' active' : '';
+  isActivePath = (path: any): boolean => {
+    return this.router.url.includes(path) ? true : false;
   };
 
   checkUser = async (): Promise<void> => {

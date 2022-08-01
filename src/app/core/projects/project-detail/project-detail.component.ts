@@ -7,16 +7,15 @@ import {
 } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, Router } from '@angular/router';
-import {
-  AcceptValidator,
-  MaxSizeValidator,
-} from '@angular-material-components/file-input';
+import { MaxSizeValidator } from '@angular-material-components/file-input';
 import Project from 'src/models/project.model';
 import { ProjectService } from 'src/services/project.service';
 import { ThemePalette } from '@angular/material/core';
 import CustomFile from 'src/models/file.model';
 import { FileService } from 'src/services/file.service';
 import { DomSanitizer } from '@angular/platform-browser';
+import Category from 'src/models/category.model';
+import { CategoryService } from 'src/services/category.service';
 
 @Component({
   selector: 'app-project-detail',
@@ -28,11 +27,14 @@ export class ProjectDetailComponent implements OnInit {
   project: Project;
   loading: boolean = true;
   projectForm: FormGroup;
+  categoryForm: FormGroup;
   years: (startYear: any) => string[];
   yearOptions: string[] = [];
   _editable: boolean = false;
   mainImage: any;
   extraImages: any[];
+  categories: Category[];
+  allCategories: Category[];
 
   // Main image
   color: ThemePalette = 'primary';
@@ -42,12 +44,13 @@ export class ProjectDetailComponent implements OnInit {
   // Extra image
   extraImageControl: FormControl;
 
-  public files: any;
-  maxSize = 500;
+  // public files: any;
+  maxSize: number = 500;
 
   constructor(
     private activatedRoute: ActivatedRoute,
     private projectService: ProjectService,
+    private categoryService: CategoryService,
     private fileService: FileService,
     private _snackBar: MatSnackBar,
     private router: Router,
@@ -63,12 +66,18 @@ export class ProjectDetailComponent implements OnInit {
         Validators.required,
         Validators.minLength(5),
       ]),
+      visible: new FormControl<boolean>(false),
+      highlighted: new FormControl<boolean>(false),
       year: new FormControl<string>('2020', [
         Validators.required,
         Validators.minLength(4),
         Validators.maxLength(4),
       ]),
       semester: new FormControl<number>(1, [Validators.required]),
+    });
+
+    this.categoryForm = this.fb.group({
+      category: new FormControl<any>('', [Validators.required]),
     });
 
     this.years = (startYear: number) => {
@@ -140,6 +149,9 @@ export class ProjectDetailComponent implements OnInit {
     try {
       const project: Project = await this.projectService.get(this.projectId);
       this.project = project;
+      if (this.project.categories && this.project.categories.length > 0) {
+        this.categories = this.project.categories;
+      }
       if (this.project.mainImage) {
         this.setMainImage(this.project.mainImage);
       }
@@ -149,9 +161,12 @@ export class ProjectDetailComponent implements OnInit {
       this.projectForm.setValue({
         name: this.project.name,
         description: this.project.description,
+        visible: this.project.visible ?? false,
+        highlighted: this.project.highlighted ?? false,
         year: this.project.year,
         semester: this.project.semester,
       });
+      this.getAllCategories();
     } catch (error: any) {
       this.router.navigate([`../projects`]);
       this._snackBar.open(
@@ -237,5 +252,67 @@ export class ProjectDetailComponent implements OnInit {
     } else {
       this.extraImageControl.markAllAsTouched();
     }
+  };
+
+  getAllCategories = async (): Promise<void> => {
+    try {
+      const res: any = await this.categoryService.getAll(1, 999);
+      const categories: Category[] = res.data.categories;
+      this.allCategories = categories.filter((category: Category) => {
+        return !this.categories.some((cat: Category) => {
+          return cat._id === category._id;
+        });
+      });
+    } catch (error: any) {
+      this._snackBar.open(
+        'Ocurrió un error al cargar las categorías',
+        'Cerrar',
+        {
+          horizontalPosition: 'end',
+          verticalPosition: 'bottom',
+        }
+      );
+    } finally {
+      // this.loadingCategories = false;
+    }
+  };
+
+  getOptionText = (option: Category) => {
+    return option.label;
+  };
+
+  removeCategory = async (category: Category): Promise<void> => {
+    const categories: string[] = this.categories.map((category: Category) => {
+      return category._id || '';
+    });
+    const index = categories.indexOf(category._id!);
+    if (index > -1) {
+      this.categoryForm.disable();
+      categories.splice(index, 1);
+      await this.saveCategories(categories);
+      this.categoryForm.enable();
+    }
+  };
+
+  addCategory = async (): Promise<void> => {
+    if (this.categoryForm.valid) {
+      this.categoryForm.disable();
+      const categories: string[] = this.categories.map((category: Category) => {
+        return category._id || '';
+      });
+      const newCat: Category = this.categoryForm.value.category;
+      categories.push(newCat._id!);
+      await this.saveCategories(categories);
+      this.categoryForm.clearValidators();
+      this.categoryForm.setValue({ category: '' });
+      this.categoryForm.enable();
+    }
+  };
+
+  saveCategories = async (categories: string[]): Promise<void> => {
+    await this.projectService.update(this.project._id!, {
+      categories,
+    } as Project);
+    await this.getProjectData();
   };
 }
