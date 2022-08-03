@@ -24,6 +24,8 @@ export class ProjectsComponent implements OnInit {
     'name',
     'year',
     'semester',
+    'visible',
+    'highlighted',
     'categories',
     // 'actions'
   ];

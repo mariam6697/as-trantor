@@ -33,7 +33,7 @@ export class ProjectDetailComponent implements OnInit {
   _editable: boolean = false;
   mainImage: any;
   extraImages: any[];
-  categories: Category[];
+  categories: Category[] = [];
   allCategories: Category[];
 
   // Main image
@@ -65,6 +65,11 @@ export class ProjectDetailComponent implements OnInit {
       description: new FormControl<string>('', [
         Validators.required,
         Validators.minLength(5),
+      ]),
+      shortDescription: new FormControl<string>('', [
+        Validators.required,
+        Validators.minLength(5),
+        Validators.maxLength(40),
       ]),
       visible: new FormControl<boolean>(false),
       highlighted: new FormControl<boolean>(false),
@@ -160,7 +165,8 @@ export class ProjectDetailComponent implements OnInit {
       }
       this.projectForm.setValue({
         name: this.project.name,
-        description: this.project.description,
+        description: this.project.description ?? '',
+        shortDescription: this.project.shortDescription ?? '',
         visible: this.project.visible ?? false,
         highlighted: this.project.highlighted ?? false,
         year: this.project.year,
@@ -285,7 +291,7 @@ export class ProjectDetailComponent implements OnInit {
     const categories: string[] = this.categories.map((category: Category) => {
       return category._id || '';
     });
-    const index = categories.indexOf(category._id!);
+    const index: number = categories.indexOf(category._id!);
     if (index > -1) {
       this.categoryForm.disable();
       categories.splice(index, 1);

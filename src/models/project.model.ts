@@ -5,6 +5,7 @@ export default interface Project {
   _id?: string;
   name: string;
   description?: string;
+  shortDescription?: string;
   highlighted?: boolean;
   visible?: boolean;
   semester?: Semester;
