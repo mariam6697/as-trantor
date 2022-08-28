@@ -3,6 +3,7 @@ import CustomFile from './file.model';
 
 export default interface Project {
   _id?: string;
+  nanoId?: string;
   name: string;
   description?: string;
   shortDescription?: string;
