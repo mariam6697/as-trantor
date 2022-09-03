@@ -38,6 +38,9 @@ import { CategoryDialogComponent } from './categories/category-dialog/category-d
 import { SharedModule } from 'src/app/shared/shared.module';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MainDetailsComponent } from './project-detail/main-details/main-details.component';
+import { ImagesComponent } from './project-detail/images/images.component';
+import { ProjectCategoriesComponent } from './project-detail/project-categories/project-categories.component';
 
 @NgModule({
   declarations: [
@@ -49,6 +52,9 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
     CategoriesComponent,
     DeleteCategoryDialogComponent,
     CategoryDialogComponent,
+    MainDetailsComponent,
+    ImagesComponent,
+    ProjectCategoriesComponent,
   ],
   imports: [
     CommonModule,

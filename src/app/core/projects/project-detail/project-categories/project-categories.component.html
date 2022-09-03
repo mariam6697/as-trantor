@@ -1,0 +1,54 @@
+<div class="responsive-row">
+  <div class="half-row">
+    <h3>Agregar nueva categoría</h3>
+    <form
+      style="margin-bottom: 2rem"
+      [formGroup]="categoryForm"
+      (ngSubmit)="addCategory()"
+    >
+      <mat-form-field style="width: 100%" appearance="outline">
+        <mat-label>Seleccionar categoría</mat-label>
+        <input
+          type="text"
+          placeholder="Pick one"
+          aria-label="Number"
+          matInput
+          formControlName="category"
+          [matAutocomplete]="auto"
+        />
+        <mat-autocomplete #auto="matAutocomplete" [displayWith]="getOptionText">
+          <mat-option *ngFor="let category of allCategories" [value]="category">
+            {{ category.label }}
+          </mat-option>
+        </mat-autocomplete>
+      </mat-form-field>
+      <button mat-flat-button color="primary" type="submit">Guardar</button>
+    </form>
+  </div>
+  <div class="half-row">
+    <mat-form-field style="width: 100%" appearance="outline">
+      <mat-label>Categorías</mat-label>
+      <mat-chip-list #chipList aria-label="Categorías">
+        <mat-chip
+          *ngFor="let category of categories"
+          (removed)="removeCategory(category)"
+          [ngStyle]="{
+            'background-color': '#' + category.backgroundHexColor,
+            color: '#' + category.textHexColor
+          }"
+        >
+          {{ category.label }}
+          <button matChipRemove>
+            <mat-icon
+              [ngStyle]="{
+                'background-color': '#' + category.backgroundHexColor,
+                color: '#' + category.textHexColor
+              }"
+              >cancel</mat-icon
+            >
+          </button>
+        </mat-chip>
+      </mat-chip-list>
+    </mat-form-field>
+  </div>
+</div>

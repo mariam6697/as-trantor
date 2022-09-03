@@ -1,22 +1,7 @@
-.responsive-row {
-  display: flex;
-  flex-direction: row;
-
-  .half-row {
-    margin: 0.5rem;
-    width: 50%;
-  }
-}
-
 .md-container {
-  // border: 1px solid rgba(0, 0, 0, 0.12);
   background-color: rgba(0, 0, 0, 0.025);
   padding: 0.5rem;
   border-radius: 5px;
-}
-
-.as-main-image {
-  max-width: 100%;
 }
 
 .mat-checkbox-container {

@@ -1,0 +1,80 @@
+<div class="responsive-row">
+  <div class="half-row">
+    <div class="as-header">
+      <h3>Detalle del proyecto</h3>
+      <div>
+        <mat-slide-toggle
+          labelPosition="before"
+          color="primary"
+          [disabled]="loading"
+          [checked]="editable"
+          (change)="editable = !editable"
+        >
+          <h4 style="margin-bottom: 0">Editar</h4>
+        </mat-slide-toggle>
+      </div>
+    </div>
+    <form [formGroup]="projectForm" (ngSubmit)="save()">
+      <mat-form-field appearance="outline" style="width: 100%">
+        <mat-label>Nombre</mat-label>
+        <input matInput formControlName="name" />
+      </mat-form-field>
+      <mat-form-field appearance="outline" style="width: 100%">
+        <mat-label>Año</mat-label>
+        <select matNativeControl matInput formControlName="year" required>
+          <option *ngFor="let year of yearOptions" [value]="year">
+            {{ year }}
+          </option>
+        </select>
+      </mat-form-field>
+      <mat-form-field appearance="outline" style="width: 100%">
+        <mat-label>Semestre</mat-label>
+        <select matNativeControl matInput formControlName="semester" required>
+          <option value="1">Primero</option>
+          <option value="2">Segundo</option>
+        </select>
+      </mat-form-field>
+      <mat-form-field appearance="outline" style="width: 100%">
+        <mat-label>Descripción</mat-label>
+        <textarea
+          matInput
+          cdkTextareaAutosize
+          cdkAutosizeMinRows="2"
+          cdkAutosizeMaxRows="5"
+          formControlName="description"
+        ></textarea>
+      </mat-form-field>
+      <mat-form-field appearance="outline" style="width: 100%">
+        <mat-label>Descripción corta</mat-label>
+        <textarea
+          matInput
+          cdkTextareaAutosize
+          cdkAutosizeMinRows="1"
+          cdkAutosizeMaxRows="2"
+          formControlName="shortDescription"
+        ></textarea>
+      </mat-form-field>
+      <div class="mat-checkbox-container">
+        <mat-checkbox formControlName="visible">Visible</mat-checkbox>
+      </div>
+      <div class="mat-checkbox-container">
+        <mat-checkbox formControlName="highlighted">Destacado</mat-checkbox>
+      </div>
+      <button
+        mat-flat-button
+        color="primary"
+        type="submit"
+        [disabled]="!editable"
+      >
+        Guardar
+      </button>
+    </form>
+  </div>
+  <div class="half-row">
+    <h3>Vista previa descripción</h3>
+    <div class="md-container">
+      <markdown emoji [data]="projectForm.get('description')!.value">
+      </markdown>
+    </div>
+  </div>
+</div>

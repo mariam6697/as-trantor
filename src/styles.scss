@@ -179,3 +179,13 @@ $as-theme: mat.define-light-theme(
   justify-content: space-between;
   min-width: 300px;
 }
+
+.responsive-row {
+  display: flex;
+  flex-direction: row;
+
+  .half-row {
+    margin: 0.5rem;
+    width: 50%;
+  }
+}

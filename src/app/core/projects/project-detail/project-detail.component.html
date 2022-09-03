@@ -30,91 +30,10 @@
         </h1>
       </mat-panel-title>
     </mat-expansion-panel-header>
-    <div class="responsive-row">
-      <div class="half-row">
-        <div class="as-header">
-          <h3>Detalle del proyecto</h3>
-          <div>
-            <mat-slide-toggle
-              labelPosition="before"
-              color="primary"
-              [disabled]="loading"
-              [checked]="editable"
-              (change)="editable = !editable"
-            >
-              <h4 style="margin-bottom: 0">Editar</h4>
-            </mat-slide-toggle>
-          </div>
-        </div>
-        <form [formGroup]="projectForm" (ngSubmit)="save()">
-          <mat-form-field appearance="outline" style="width: 100%">
-            <mat-label>Nombre</mat-label>
-            <input matInput formControlName="name" />
-          </mat-form-field>
-          <mat-form-field appearance="outline" style="width: 100%">
-            <mat-label>Año</mat-label>
-            <select matNativeControl matInput formControlName="year" required>
-              <option *ngFor="let year of yearOptions" [value]="year">
-                {{ year }}
-              </option>
-            </select>
-          </mat-form-field>
-          <mat-form-field appearance="outline" style="width: 100%">
-            <mat-label>Semestre</mat-label>
-            <select
-              matNativeControl
-              matInput
-              formControlName="semester"
-              required
-            >
-              <option value="1">Primero</option>
-              <option value="2">Segundo</option>
-            </select>
-          </mat-form-field>
-          <mat-form-field appearance="outline" style="width: 100%">
-            <mat-label>Descripción</mat-label>
-            <textarea
-              matInput
-              cdkTextareaAutosize
-              cdkAutosizeMinRows="2"
-              cdkAutosizeMaxRows="5"
-              formControlName="description"
-            ></textarea>
-          </mat-form-field>
-          <mat-form-field appearance="outline" style="width: 100%">
-            <mat-label>Descripción corta</mat-label>
-            <textarea
-              matInput
-              cdkTextareaAutosize
-              cdkAutosizeMinRows="1"
-              cdkAutosizeMaxRows="2"
-              formControlName="shortDescription"
-            ></textarea>
-          </mat-form-field>
-          <div class="mat-checkbox-container">
-            <mat-checkbox formControlName="visible">Visible</mat-checkbox>
-          </div>
-          <div class="mat-checkbox-container">
-            <mat-checkbox formControlName="highlighted">Destacado</mat-checkbox>
-          </div>
-          <button
-            mat-flat-button
-            color="primary"
-            type="submit"
-            [disabled]="!editable"
-          >
-            Guardar
-          </button>
-        </form>
-      </div>
-      <div class="half-row">
-        <h3>Vista previa descripción</h3>
-        <div class="md-container">
-          <markdown emoji [data]="projectForm.get('description')!.value">
-          </markdown>
-        </div>
-      </div>
-    </div>
+    <app-main-details
+      [projectData]="project"
+      [loading]="loading"
+    ></app-main-details>
   </mat-expansion-panel>
 
   <mat-expansion-panel
@@ -126,57 +45,11 @@
         <h1 style="margin-bottom: 0; font-size: 1.3rem">Recursos gráficos</h1>
       </mat-panel-title>
     </mat-expansion-panel-header>
-    <div class="responsive-row">
-      <div class="half-row">
-        <h3>Imagen principal</h3>
-        <mat-form-field appearance="outline" style="width: 65%">
-          <mat-label>Imagen principal</mat-label>
-          <ngx-mat-file-input
-            [formControl]="mainImageControl"
-            [accept]="accept"
-            [color]="color"
-          >
-          </ngx-mat-file-input>
-        </mat-form-field>
-        <button
-          style="margin-left: 0.5rem"
-          mat-flat-button
-          color="primary"
-          (click)="saveMainImage()"
-        >
-          Guardar
-        </button>
-        <div>
-          <img *ngIf="mainImage" class="as-main-image" [src]="mainImage" />
-        </div>
-      </div>
-      <div class="half-row">
-        <h3>Imágenes extra</h3>
-        <div>
-          <mat-form-field appearance="outline" style="width: 65%">
-            <mat-label>Imagen adicional</mat-label>
-            <ngx-mat-file-input
-              [formControl]="extraImageControl"
-              [accept]="accept"
-              [color]="color"
-            >
-            </ngx-mat-file-input>
-          </mat-form-field>
-          <button
-            style="margin-left: 0.5rem"
-            mat-flat-button
-            color="primary"
-            (click)="saveExtraImage()"
-          >
-            Guardar
-          </button>
-        </div>
-        <app-extra-images
-          (load-project)="getProjectData()"
-          [extra-images]="extraImages"
-        ></app-extra-images>
-      </div>
-    </div>
+    <app-images
+      [projectData]="project"
+      [loading]="loading"
+      [reloadProjectData]="getProjectData.bind(this)"
+    ></app-images>
   </mat-expansion-panel>
 
   <mat-expansion-panel class="mat-elevation-z0">
@@ -185,65 +58,10 @@
         <h1 style="margin-bottom: 0; font-size: 1.3rem">Categorías</h1>
       </mat-panel-title>
     </mat-expansion-panel-header>
-    <div class="responsive-row">
-      <div class="half-row">
-        <h3>Agregar nueva categoría</h3>
-        <form
-          style="margin-bottom: 2rem"
-          [formGroup]="categoryForm"
-          (ngSubmit)="addCategory()"
-        >
-          <mat-form-field style="width: 100%" appearance="outline">
-            <mat-label>Seleccionar categoría</mat-label>
-            <input
-              type="text"
-              placeholder="Pick one"
-              aria-label="Number"
-              matInput
-              formControlName="category"
-              [matAutocomplete]="auto"
-            />
-            <mat-autocomplete
-              #auto="matAutocomplete"
-              [displayWith]="getOptionText"
-            >
-              <mat-option
-                *ngFor="let category of allCategories"
-                [value]="category"
-              >
-                {{ category.label }}
-              </mat-option>
-            </mat-autocomplete>
-          </mat-form-field>
-          <button mat-flat-button color="primary" type="submit">Guardar</button>
-        </form>
-      </div>
-      <div class="half-row">
-        <mat-form-field style="width: 100%" appearance="outline">
-          <mat-label>Categorías</mat-label>
-          <mat-chip-list #chipList aria-label="Categorías">
-            <mat-chip
-              *ngFor="let category of categories"
-              (removed)="removeCategory(category)"
-              [ngStyle]="{
-                'background-color': '#' + category.backgroundHexColor,
-                color: '#' + category.textHexColor
-              }"
-            >
-              {{ category.label }}
-              <button matChipRemove>
-                <mat-icon
-                  [ngStyle]="{
-                    'background-color': '#' + category.backgroundHexColor,
-                    color: '#' + category.textHexColor
-                  }"
-                  >cancel</mat-icon
-                >
-              </button>
-            </mat-chip>
-          </mat-chip-list>
-        </mat-form-field>
-      </div>
-    </div>
+    <app-project-categories
+      [projectData]="project"
+      [loading]="loading"
+      [reloadProjectData]="getProjectData.bind(this)"
+    ></app-project-categories>
   </mat-expansion-panel>
 </mat-accordion>

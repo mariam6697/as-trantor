@@ -1,0 +1,51 @@
+<div class="responsive-row">
+  <div class="half-row">
+    <h3>Imagen principal</h3>
+    <mat-form-field appearance="outline" style="width: 65%">
+      <mat-label>Imagen principal</mat-label>
+      <ngx-mat-file-input
+        [formControl]="mainImageControl"
+        [accept]="accept"
+        [color]="color"
+      >
+      </ngx-mat-file-input>
+    </mat-form-field>
+    <button
+      style="margin-left: 0.5rem"
+      mat-flat-button
+      color="primary"
+      (click)="saveMainImage()"
+    >
+      Guardar
+    </button>
+    <div>
+      <img *ngIf="mainImage" class="as-main-image" [src]="mainImage" />
+    </div>
+  </div>
+  <div class="half-row">
+    <h3>Imágenes extra</h3>
+    <div>
+      <mat-form-field appearance="outline" style="width: 65%">
+        <mat-label>Imagen adicional</mat-label>
+        <ngx-mat-file-input
+          [formControl]="extraImageControl"
+          [accept]="accept"
+          [color]="color"
+        >
+        </ngx-mat-file-input>
+      </mat-form-field>
+      <button
+        style="margin-left: 0.5rem"
+        mat-flat-button
+        color="primary"
+        (click)="saveExtraImage()"
+      >
+        Guardar
+      </button>
+    </div>
+    <app-extra-images
+      (load-project)="getProjectData()"
+      [extra-images]="extraImages"
+    ></app-extra-images>
+  </div>
+</div>
