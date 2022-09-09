@@ -1,0 +1,14 @@
+<mat-card class="mat-elevation-z0" style="background-color: #f5f5f5">
+  <mat-progress-bar *ngIf="loading" mode="indeterminate"></mat-progress-bar>
+  <div class="repo">
+    <div class="repo-data">
+      <div class="repo-name">{{ repo.name }}</div>
+      <button mat-icon-button [disabled]="loading" (click)="openLink()">
+        <mat-icon>open_in_new</mat-icon>
+      </button>
+    </div>
+    <button mat-icon-button [disabled]="loading" (click)="openDeleteDialog()">
+      <mat-icon>delete</mat-icon>
+    </button>
+  </div>
+</mat-card>

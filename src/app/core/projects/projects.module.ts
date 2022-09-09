@@ -38,9 +38,14 @@ import { CategoryDialogComponent } from './categories/category-dialog/category-d
 import { SharedModule } from 'src/app/shared/shared.module';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
+
 import { MainDetailsComponent } from './project-detail/main-details/main-details.component';
 import { ImagesComponent } from './project-detail/images/images.component';
 import { ProjectCategoriesComponent } from './project-detail/project-categories/project-categories.component';
+import { SourceCodeComponent } from './project-detail/source-code/source-code.component';
+import { RepoComponent } from './project-detail/source-code/repo/repo.component';
+import { DeleteRepoDialogComponent } from './project-detail/source-code/delete-repo-dialog/delete-repo-dialog.component';
 
 @NgModule({
   declarations: [
@@ -55,6 +60,9 @@ import { ProjectCategoriesComponent } from './project-detail/project-categories/
     MainDetailsComponent,
     ImagesComponent,
     ProjectCategoriesComponent,
+    SourceCodeComponent,
+    RepoComponent,
+    DeleteRepoDialogComponent,
   ],
   imports: [
     CommonModule,
@@ -92,6 +100,7 @@ import { ProjectCategoriesComponent } from './project-detail/project-categories/
     SharedModule,
     MatAutocompleteModule,
     MatCheckboxModule,
+    MatProgressBarModule,
   ],
 })
 export class ProjectsModule {}

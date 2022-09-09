@@ -1,0 +1,41 @@
+<div>
+  <div *ngIf="!hasRepository">
+    <div class="file-selector">
+      <button
+        type="button"
+        mat-flat-button
+        color="accent"
+        (click)="folderInput.click()"
+      >
+        Seleccionar archivos
+      </button>
+      <input
+        hidden
+        (change)="filesPicked(folderInput.files)"
+        #folderInput
+        type="file"
+        name="files"
+        webkitDirectory
+      />
+      <div class="desc" *ngIf="files.length > 0">
+        {{ files.length }} archivos seleccionados
+      </div>
+    </div>
+
+    <div *ngIf="files.length > 0">
+      <div class="selected-files">
+        <p *ngFor="let file of files">{{ file.path }}</p>
+      </div>
+
+      <button mat-flat-button color="primary" (click)="uploadFiles()">
+        Subir código fuente
+      </button>
+    </div>
+  </div>
+
+  <app-repo
+    *ngFor="let repo of repos"
+    [repo]="repo"
+    [reloadRepos]="getRepositories"
+  ></app-repo>
+</div>

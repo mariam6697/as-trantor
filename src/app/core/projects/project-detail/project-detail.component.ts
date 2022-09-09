@@ -32,7 +32,6 @@ export class ProjectDetailComponent implements OnInit {
   }
 
   getProjectData = async (): Promise<void> => {
-    console.log(' REALOD');
     try {
       const project: Project = await this.projectService.get(this.projectId);
       this.project = project;

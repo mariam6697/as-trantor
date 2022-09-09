@@ -1,0 +1,13 @@
+.repo {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  .repo-data {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+    .repo-name {
+    }
+  }
+}

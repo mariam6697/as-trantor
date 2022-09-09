@@ -21,18 +21,20 @@ export class FileService {
     return safeFile;
   };
 
-  fromFileToBase64 = (image: any): Promise<CustomFile> => {
+  fromFileToBase64 = (
+    fileData: any,
+    extension?: string
+  ): Promise<CustomFile> => {
     return new Promise((resolve, reject) => {
       const reader = new FileReader();
-      let file: any;
-      reader.readAsDataURL(image);
+      reader.readAsDataURL(fileData);
       reader.onload = async () => {
         try {
           const base64: string = reader.result!.toString().split(',')[1];
           const file: CustomFile = {
-            extension: '.jpg',
-            size: image.size,
-            type: image.type,
+            extension: extension ? extension : '.jpg',
+            size: fileData.size,
+            type: fileData.type,
             base64: base64,
           };
           resolve(file);
@@ -75,7 +77,7 @@ export class FileService {
 
   deleteFile = async (fileId: string): Promise<any> => {
     const accessToken: string = LocalDataService.getAccessToken();
-    const url: string = `${this.apiUrl}/core/files//${fileId}`;
+    const url: string = `${this.apiUrl}/core/files/${fileId}`;
     const response: any = await axios.delete(url, {
       headers: {
         Authorization: `Bearer ${accessToken}`,

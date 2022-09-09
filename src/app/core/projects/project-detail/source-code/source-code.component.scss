@@ -1,0 +1,21 @@
+.file-selector {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+
+  .desc {
+    margin-left: 10px;
+  }
+}
+
+.selected-files {
+  background-color: #f5f5f5;
+  padding: 0.5rem;
+  margin: 1rem 0;
+  max-height: 100px;
+  overflow: scroll;
+
+  p {
+    margin-bottom: 5px;
+  }
+}

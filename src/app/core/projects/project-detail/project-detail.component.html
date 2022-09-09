@@ -64,4 +64,17 @@
       [reloadProjectData]="getProjectData.bind(this)"
     ></app-project-categories>
   </mat-expansion-panel>
+
+  <mat-expansion-panel class="mat-elevation-z0">
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        <h1 style="margin-bottom: 0; font-size: 1.3rem">Código fuente</h1>
+      </mat-panel-title>
+    </mat-expansion-panel-header>
+    <app-source-code
+      [projectData]="project"
+      [loading]="loading"
+      [reloadProjectData]="getProjectData.bind(this)"
+    ></app-source-code>
+  </mat-expansion-panel>
 </mat-accordion>
