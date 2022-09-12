@@ -34,6 +34,11 @@
             </select>
         </mat-form-field>
 
+        <mat-slide-toggle *ngIf="action == 'edit'" labelPosition="after" color="primary" [disabled]="loading"
+            formControlName="enabled">
+            <h4 style="margin-bottom: 0">Habilitado</h4>
+        </mat-slide-toggle>
+
     </form>
 </div>
 <div mat-dialog-actions>

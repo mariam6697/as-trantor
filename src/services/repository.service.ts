@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import axios from 'axios';
 import { environment } from 'src/environments/environment';
+import { RemoteFile } from 'src/models/remote.model';
 import Repository from 'src/models/repository.model';
 import { LocalDataService } from './local-data.service';
 
@@ -11,7 +12,10 @@ export class RepositoryService {
   apiUrl: string = environment.apiUrl;
   constructor() {}
 
-  create = async (projectId: string, files: any): Promise<Repository> => {
+  create = async (
+    projectId: string,
+    files: RemoteFile[]
+  ): Promise<Repository> => {
     const accessToken: string = LocalDataService.getAccessToken();
     const url: string = `${this.apiUrl}/core/repositories/${projectId}`;
     const response: any = await axios.post(

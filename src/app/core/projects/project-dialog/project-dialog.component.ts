@@ -57,7 +57,7 @@ export class ProjectDialogComponent implements OnInit {
       }
       return years;
     };
-    
+
     this.yearOptions = this.years(2000);
   }
 
@@ -75,7 +75,7 @@ export class ProjectDialogComponent implements OnInit {
     }
   }
 
-  ngOnInit(): void  {};
+  ngOnInit(): void {}
 
   onNoClick = (): void => {
     this.dialogRef.close();
@@ -85,7 +85,12 @@ export class ProjectDialogComponent implements OnInit {
     if (this.projectForm.valid) {
       try {
         this.loading = true;
-        const projectData: Project = this.projectForm.value;
+        const projectData: Project = {
+          ...this.projectForm.value,
+          shortDescription: '',
+          highlighted: false,
+          visible: false,
+        };
         let response: any = await this.projectService.create(projectData);
         if (response.status === 'ok') {
           this.dialogRef.close();

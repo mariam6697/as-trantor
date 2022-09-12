@@ -27,7 +27,6 @@ export class ProjectsComponent implements OnInit {
     'visible',
     'highlighted',
     'categories',
-    // 'actions'
   ];
   loggedInUserId: string = '';
 

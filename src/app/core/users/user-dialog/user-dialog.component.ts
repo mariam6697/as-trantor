@@ -68,7 +68,7 @@ export class UserDialogComponent implements OnInit {
       };
       this.userForm.setControl(
         'enabled',
-        new FormControl<string>('', [
+        new FormControl<boolean>(user.enabled!, [
           Validators.required,
           Validators.minLength(5),
         ])
