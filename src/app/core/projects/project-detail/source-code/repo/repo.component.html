@@ -3,11 +3,29 @@
   <div class="repo">
     <div class="repo-data">
       <div class="repo-name">{{ repo.name }}</div>
-      <button mat-icon-button [disabled]="loading" (click)="openLink()">
+      <button
+        mat-icon-button
+        matTooltip="Ir al repositorio"
+        [disabled]="loading"
+        (click)="openLink()"
+      >
         <mat-icon>open_in_new</mat-icon>
       </button>
+      <button
+        mat-icon-button
+        matTooltip="Copiar elace"
+        [disabled]="loading"
+        (click)="copyLink()"
+      >
+        <mat-icon>content_copy</mat-icon>
+      </button>
     </div>
-    <button mat-icon-button [disabled]="loading" (click)="openDeleteDialog()">
+    <button
+      mat-icon-button
+      matTooltip="Eliminar"
+      [disabled]="loading"
+      (click)="openDeleteDialog()"
+    >
       <mat-icon>delete</mat-icon>
     </button>
   </div>

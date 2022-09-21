@@ -39,6 +39,7 @@ import { SharedModule } from 'src/app/shared/shared.module';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 import { MainDetailsComponent } from './project-detail/main-details/main-details.component';
 import { ImagesComponent } from './project-detail/images/images.component';
@@ -101,6 +102,7 @@ import { DeleteRepoDialogComponent } from './project-detail/source-code/delete-r
     MatAutocompleteModule,
     MatCheckboxModule,
     MatProgressBarModule,
+    MatTooltipModule,
   ],
 })
 export class ProjectsModule {}
