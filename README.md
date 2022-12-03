@@ -1,4 +1,6 @@
-# AsTrantor
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=mariam6697_as-trantor&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=mariam6697_as-trantor)
+
+# AS Trantor
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 13.3.5.
 
