@@ -1,5 +1,8 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { LoggedInGuard } from 'src/guards/logged-in.guard';
+import { ProjectsGuard } from 'src/guards/projects.guard';
+import { UsersGuard } from 'src/guards/users.guard';
 import { CoreComponent } from './core.component';
 
 const routes: Routes = [
@@ -10,17 +13,19 @@ const routes: Routes = [
       {
         path: '',
         pathMatch: 'full',
-        redirectTo: 'users',
+        redirectTo: 'projects',
       },
       {
         path: 'users',
         loadChildren: () =>
           import('./users/users.module').then((m) => m.UsersModule),
+        canActivate: [LoggedInGuard, UsersGuard],
       },
       {
         path: 'projects',
         loadChildren: () =>
           import('./projects/projects.module').then((m) => m.ProjectsModule),
+        canActivate: [LoggedInGuard, ProjectsGuard],
       },
     ],
   },

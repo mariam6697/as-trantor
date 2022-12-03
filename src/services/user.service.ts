@@ -3,6 +3,7 @@ import { environment } from 'src/environments/environment';
 import axios from 'axios';
 import { LocalDataService } from './local-data.service';
 import User from '.././models/user.model';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root',
@@ -10,7 +11,10 @@ import User from '.././models/user.model';
 export class UserService {
   apiUrl: string = environment.apiUrl;
 
-  constructor() {}
+  constructor(
+    private localDataService: LocalDataService,
+    private router: Router
+  ) {}
 
   login = async (email: string, password: string): Promise<any> => {
     const data: any = { email, password };
@@ -19,6 +23,21 @@ export class UserService {
       data
     );
     return response.data;
+  };
+
+  check = async (): Promise<User> => {
+    const accessToken: string = LocalDataService.getAccessToken();
+    const response: any = await axios.get(`${this.apiUrl}/auth/users/check`, {
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+      },
+    });
+    return response.data.data;
+  };
+
+  logout = (): void => {
+    this.localDataService.deleteAll();
+    this.router.navigate(['../../auth/login']);
   };
 
   create = async (userData: User): Promise<any> => {

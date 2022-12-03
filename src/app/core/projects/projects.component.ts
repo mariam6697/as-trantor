@@ -68,7 +68,7 @@ export class ProjectsComponent implements OnInit {
     } catch (error: any) {
       this.projects = [];
       this._snackBar.open(
-        'Ocurrió un error al cargar la lista de usuarios',
+        'Ocurrió un error al cargar la lista de proyectos',
         'Cerrar',
         {
           horizontalPosition: 'end',
