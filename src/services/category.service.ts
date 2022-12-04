@@ -10,10 +10,10 @@ import { LocalDataService } from './local-data.service';
 export class CategoryService {
   apiUrl: string = environment.apiUrl;
 
-  constructor() {}
+  constructor(private localDataService: LocalDataService) {}
 
   create = async (categoryData: Category): Promise<any> => {
-    const accessToken: string = LocalDataService.getAccessToken();
+    const accessToken: string = this.localDataService.getAccessToken();
     const url: string = `${this.apiUrl}/core/categories`;
     const response: any = await axios.post(url, categoryData, {
       headers: {
@@ -25,7 +25,7 @@ export class CategoryService {
   };
 
   get = async (categoryId: string): Promise<Category> => {
-    const accessToken: string = LocalDataService.getAccessToken();
+    const accessToken: string = this.localDataService.getAccessToken();
     const url: string = `${this.apiUrl}/core/categories/${categoryId}`;
     const response: any = await axios.get(url, {
       headers: {
@@ -37,7 +37,7 @@ export class CategoryService {
   };
 
   getAll = async (page: number, limit: number): Promise<any> => {
-    const accessToken: string = LocalDataService.getAccessToken();
+    const accessToken: string = this.localDataService.getAccessToken();
     let url: string = `${this.apiUrl}/core/categories?page=${page}&limit=${limit}`;
     const response: any = await axios.get(url, {
       headers: {
@@ -48,7 +48,7 @@ export class CategoryService {
   };
 
   update = async (categoryId: string, categoryData: Category): Promise<any> => {
-    const accessToken: string = LocalDataService.getAccessToken();
+    const accessToken: string = this.localDataService.getAccessToken();
     const url: string = `${this.apiUrl}/core/categories/${categoryId}`;
     const response: any = await axios.put(url, categoryData, {
       headers: {

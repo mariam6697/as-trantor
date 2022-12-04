@@ -40,6 +40,8 @@ import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
 
 import { MainDetailsComponent } from './project-detail/main-details/main-details.component';
 import { ImagesComponent } from './project-detail/images/images.component';
@@ -47,6 +49,8 @@ import { ProjectCategoriesComponent } from './project-detail/project-categories/
 import { SourceCodeComponent } from './project-detail/source-code/source-code.component';
 import { RepoComponent } from './project-detail/source-code/repo/repo.component';
 import { DeleteRepoDialogComponent } from './project-detail/source-code/delete-repo-dialog/delete-repo-dialog.component';
+import { UpdatesComponent } from './updates/updates.component';
+import { UpdateDialogComponent } from './updates/update-dialog/update-dialog.component';
 
 @NgModule({
   declarations: [
@@ -64,6 +68,8 @@ import { DeleteRepoDialogComponent } from './project-detail/source-code/delete-r
     SourceCodeComponent,
     RepoComponent,
     DeleteRepoDialogComponent,
+    UpdatesComponent,
+    UpdateDialogComponent,
   ],
   imports: [
     CommonModule,
@@ -105,6 +111,8 @@ import { DeleteRepoDialogComponent } from './project-detail/source-code/delete-r
     MatTooltipModule,
     MatSlideToggleModule,
     FormsModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
   ],
 })
 export class ProjectsModule {}

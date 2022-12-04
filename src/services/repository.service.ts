@@ -10,7 +10,7 @@ import { LocalDataService } from './local-data.service';
 })
 export class RepositoryService {
   apiUrl: string = environment.apiUrl;
-  constructor() {}
+  constructor(private localDataService: LocalDataService) {}
 
   create = async (
     projectId: string,
@@ -23,7 +23,7 @@ export class RepositoryService {
       label,
       private: privateRepo,
     };
-    const accessToken: string = LocalDataService.getAccessToken();
+    const accessToken: string = this.localDataService.getAccessToken();
     const url: string = `${this.apiUrl}/core/repositories/${projectId}`;
     const response: any = await axios.post(url, body, {
       headers: {
@@ -35,7 +35,7 @@ export class RepositoryService {
   };
 
   get = async (projectNanoId: string): Promise<Repository[]> => {
-    const accessToken: string = LocalDataService.getAccessToken();
+    const accessToken: string = this.localDataService.getAccessToken();
     const url: string = `${this.apiUrl}/core/repositories/project/${projectNanoId}`;
     const response: any = await axios.get(url, {
       headers: {
@@ -47,7 +47,7 @@ export class RepositoryService {
   };
 
   delete = async (repoId: string): Promise<void> => {
-    const accessToken: string = LocalDataService.getAccessToken();
+    const accessToken: string = this.localDataService.getAccessToken();
     const url: string = `${this.apiUrl}/core/repositories/${repoId}`;
     await axios.delete(url, {
       headers: {

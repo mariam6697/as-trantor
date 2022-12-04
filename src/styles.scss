@@ -189,3 +189,7 @@ $as-theme: mat.define-light-theme(
     width: 50%;
   }
 }
+
+.mat-form-field-infix {
+  display: flex !important;
+}

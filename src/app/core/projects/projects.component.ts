@@ -27,6 +27,7 @@ export class ProjectsComponent implements OnInit {
     'visible',
     'highlighted',
     'categories',
+    'actions',
   ];
   loggedInUserId: string = '';
 
@@ -93,6 +94,6 @@ export class ProjectsComponent implements OnInit {
   };
 
   goToDetail = (project: Project): void => {
-    this.router.navigate([`projects/${project._id}`]);
+    this.router.navigate([`projects/updates/${project._id}`]);
   };
 }

@@ -26,7 +26,7 @@ export class UserService {
   };
 
   check = async (): Promise<User> => {
-    const accessToken: string = LocalDataService.getAccessToken();
+    const accessToken: string = this.localDataService.getAccessToken();
     const response: any = await axios.get(`${this.apiUrl}/auth/users/check`, {
       headers: {
         Authorization: `Bearer ${accessToken}`,
@@ -41,7 +41,7 @@ export class UserService {
   };
 
   create = async (userData: User): Promise<any> => {
-    const accessToken: string = LocalDataService.getAccessToken();
+    const accessToken: string = this.localDataService.getAccessToken();
     const url: string = `${this.apiUrl}/auth/users`;
     const response: any = await axios.post(url, userData, {
       headers: {
@@ -53,7 +53,7 @@ export class UserService {
   };
 
   get = async (userId: string): Promise<any> => {
-    const accessToken: string = LocalDataService.getAccessToken();
+    const accessToken: string = this.localDataService.getAccessToken();
     const url: string = `${this.apiUrl}/auth/users/${userId}`;
     const response: any = await axios.get(url, {
       headers: {
@@ -69,7 +69,7 @@ export class UserService {
     limit: number,
     search?: string
   ): Promise<any> => {
-    const accessToken: string = LocalDataService.getAccessToken();
+    const accessToken: string = this.localDataService.getAccessToken();
     let url: string = `${this.apiUrl}/auth/users?page=${page}&limit=${limit}`;
     if (search) {
       url += `&search=${search}`;
@@ -83,7 +83,7 @@ export class UserService {
   };
 
   update = async (userId: string, userData: User): Promise<any> => {
-    const accessToken: string = LocalDataService.getAccessToken();
+    const accessToken: string = this.localDataService.getAccessToken();
     const url: string = `${this.apiUrl}/auth/users/${userId}`;
     const response: any = await axios.put(url, userData, {
       headers: {
@@ -95,7 +95,7 @@ export class UserService {
   };
 
   delete = async (userId: string): Promise<any> => {
-    const accessToken: string = LocalDataService.getAccessToken();
+    const accessToken: string = this.localDataService.getAccessToken();
     const url: string = `${this.apiUrl}/auth/users/${userId}`;
     const response: any = await axios.delete(url, {
       headers: {

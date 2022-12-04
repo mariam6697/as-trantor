@@ -1,0 +1,41 @@
+<div class="as-header">
+  <h1 *ngIf="!project || !project.name">Bitácora del proyecto</h1>
+  <h1 *ngIf="project && project.name">Bitácora — {{ project.name }}</h1>
+  <div>
+    <button
+      primary
+      mat-flat-button
+      color="primary"
+      [disabled]="loading"
+      (click)="openDialog()"
+    >
+      Agregar registro
+    </button>
+  </div>
+</div>
+
+<mat-card
+  *ngIf="loading"
+  class="mat-elevation-z0"
+  style="
+    min-height: 45vh;
+    min-width: 300px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  "
+>
+  <mat-spinner *ngIf="loading" diameter="50"></mat-spinner>
+</mat-card>
+
+<mat-card
+  *ngIf="!loading"
+  class="mat-elevation-z0"
+  style="
+    min-width: 300px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  "
+>
+</mat-card>
