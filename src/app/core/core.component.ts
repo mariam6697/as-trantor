@@ -62,6 +62,10 @@ export class CoreComponent implements OnInit {
   };
 
   goToRepo = (): void => {
-    window.open('https://github.com/mariam6697/as-trantor', '_blank');
+    window.open(
+      'https://github.com/mariam6697/as-trantor',
+      '_blank',
+      'noopener,noreferrer'
+    );
   };
 }
