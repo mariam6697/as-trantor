@@ -6,7 +6,7 @@ import { ProjectDetailComponent } from './project-detail/project-detail.componen
 import { ProjectDialogComponent } from './project-dialog/project-dialog.component';
 import { ProjectsComponent } from './projects.component';
 import { NgxMatFileInputModule } from '@angular-material-components/file-input';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatChipsModule } from '@angular/material/chips';
@@ -103,6 +103,8 @@ import { DeleteRepoDialogComponent } from './project-detail/source-code/delete-r
     MatCheckboxModule,
     MatProgressBarModule,
     MatTooltipModule,
+    MatSlideToggleModule,
+    FormsModule,
   ],
 })
 export class ProjectsModule {}

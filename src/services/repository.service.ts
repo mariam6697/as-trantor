@@ -14,26 +14,29 @@ export class RepositoryService {
 
   create = async (
     projectId: string,
+    label: string,
+    privateRepo: boolean,
     files: RemoteFile[]
   ): Promise<Repository> => {
+    const body: any = {
+      files,
+      label,
+      private: privateRepo,
+    };
     const accessToken: string = LocalDataService.getAccessToken();
     const url: string = `${this.apiUrl}/core/repositories/${projectId}`;
-    const response: any = await axios.post(
-      url,
-      { files },
-      {
-        headers: {
-          Authorization: `Bearer ${accessToken}`,
-        },
-      }
-    );
+    const response: any = await axios.post(url, body, {
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+      },
+    });
     const data: Repository = response.data.data;
     return data;
   };
 
-  get = async (projectId: string): Promise<Repository[]> => {
+  get = async (projectNanoId: string): Promise<Repository[]> => {
     const accessToken: string = LocalDataService.getAccessToken();
-    const url: string = `${this.apiUrl}/core/repositories/project/${projectId}`;
+    const url: string = `${this.apiUrl}/core/repositories/project/${projectNanoId}`;
     const response: any = await axios.get(url, {
       headers: {
         Authorization: `Bearer ${accessToken}`,

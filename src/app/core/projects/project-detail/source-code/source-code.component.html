@@ -1,5 +1,9 @@
 <div>
-  <div *ngIf="!hasRepository">
+  <h2>
+    Subir código fuente
+    <mat-slide-toggle [(ngModel)]="uploadNewRepo"></mat-slide-toggle>
+  </h2>
+  <div *ngIf="uploadNewRepo" style="margin-bottom: 24px">
     <div class="file-selector">
       <button
         type="button"
@@ -23,6 +27,15 @@
     </div>
 
     <div *ngIf="files.length > 0">
+      <mat-form-field appearance="outline" style="width: 100%">
+        <mat-label>Etiqueta</mat-label>
+        <input matInput [(ngModel)]="repoDesc" />
+      </mat-form-field>
+      <div class="mat-checkbox-container">
+        <mat-checkbox [(ngModel)]="privateRepo"
+          >Repositorio privado</mat-checkbox
+        >
+      </div>
       <div class="selected-files">
         <p *ngFor="let file of files">{{ file.path }}</p>
       </div>
@@ -33,9 +46,12 @@
     </div>
   </div>
 
-  <app-repo
-    *ngFor="let repo of repos"
-    [repo]="repo"
-    [reloadRepos]="getRepositories"
-  ></app-repo>
+  <div *ngIf="repos.length > 0">
+    <h2>Repositorios de código</h2>
+    <app-repo
+      *ngFor="let repo of repos"
+      [repo]="repo"
+      [reloadRepos]="getRepositories"
+    ></app-repo>
+  </div>
 </div>
