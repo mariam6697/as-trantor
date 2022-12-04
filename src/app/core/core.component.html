@@ -54,13 +54,14 @@
       >
         <mat-icon>menu</mat-icon>
       </button>
-      <span>AS Trantor</span>
+      <span>MPB | Proyectos Apredizajes + Servicio</span>
       <span class="as-spacer"></span>
-      <button mat-icon-button class="as-icon favorite-icon">
+      <button
+        (click)="goToRepo()"
+        mat-icon-button
+        class="as-icon favorite-icon"
+      >
         <mat-icon>favorite</mat-icon>
-      </button>
-      <button mat-icon-button class="as-icon">
-        <mat-icon>share</mat-icon>
       </button>
     </mat-toolbar>
     <div class="as-container">

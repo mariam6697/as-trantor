@@ -60,4 +60,8 @@ export class CoreComponent implements OnInit {
   logout = (): void => {
     this.userService.logout();
   };
+
+  goToRepo = (): void => {
+    window.open('https://github.com/mariam6697/as-trantor', '_blank');
+  };
 }
