@@ -41,4 +41,29 @@ export class UpdatesService {
     const res: any = response.data.data;
     return res;
   };
+
+  update = async (
+    projectUpdateId: string,
+    data: ProjectUpdate
+  ): Promise<ProjectUpdate> => {
+    const accessToken: string = this.localDataService.getAccessToken();
+    const url: string = `${this.apiUrl}/core/projects-updates/${projectUpdateId}`;
+    const response: any = await axios.put(url, data, {
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+      },
+    });
+    const res: ProjectUpdate = response.data.data;
+    return res;
+  };
+
+  remove = async (projectUpdateId: string): Promise<void> => {
+    const accessToken: string = this.localDataService.getAccessToken();
+    const url: string = `${this.apiUrl}/core/projects-updates/${projectUpdateId}`;
+    await axios.delete(url, {
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+      },
+    });
+  };
 }

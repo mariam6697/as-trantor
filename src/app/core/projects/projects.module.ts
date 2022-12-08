@@ -51,6 +51,8 @@ import { RepoComponent } from './project-detail/source-code/repo/repo.component'
 import { DeleteRepoDialogComponent } from './project-detail/source-code/delete-repo-dialog/delete-repo-dialog.component';
 import { UpdatesComponent } from './updates/updates.component';
 import { UpdateDialogComponent } from './updates/update-dialog/update-dialog.component';
+import { MatDividerModule } from '@angular/material/divider';
+import { EditDialogComponent } from './updates/edit-dialog/edit-dialog.component';
 
 @NgModule({
   declarations: [
@@ -70,6 +72,7 @@ import { UpdateDialogComponent } from './updates/update-dialog/update-dialog.com
     DeleteRepoDialogComponent,
     UpdatesComponent,
     UpdateDialogComponent,
+    EditDialogComponent,
   ],
   imports: [
     CommonModule,
@@ -113,6 +116,7 @@ import { UpdateDialogComponent } from './updates/update-dialog/update-dialog.com
     FormsModule,
     MatDatepickerModule,
     MatNativeDateModule,
+    MatDividerModule,
   ],
 })
 export class ProjectsModule {}
