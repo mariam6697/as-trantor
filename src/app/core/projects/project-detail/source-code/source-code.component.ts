@@ -18,6 +18,10 @@ export class SourceCodeComponent implements OnInit {
   repos: Repository[] = [];
   hasRepository: boolean = false;
   files: RemoteFile[] = [];
+  uploadNewRepo: boolean = false;
+  privateRepo: boolean = true;
+  repoDesc: string = '';
+  uploadingCode: boolean = false;
 
   constructor(
     private repositoryService: RepositoryService,
@@ -32,7 +36,7 @@ export class SourceCodeComponent implements OnInit {
   getRepositories = async () => {
     try {
       const repositories: Repository[] = await this.repositoryService.get(
-        this.project._id!
+        this.project.nanoId!
       );
       this.repos = repositories;
       if (this.repos.length > 0) {
@@ -65,7 +69,14 @@ export class SourceCodeComponent implements OnInit {
 
   uploadFiles = async (): Promise<void> => {
     if (this.files.length > 0) {
-      await this.repositoryService.create(this.project._id!, this.files);
+      this.uploadingCode = true;
+      await this.repositoryService.create(
+        this.project._id!,
+        this.repoDesc,
+        this.privateRepo,
+        this.files
+      );
+      this.uploadingCode = false;
       await this.getRepositories();
     }
   };

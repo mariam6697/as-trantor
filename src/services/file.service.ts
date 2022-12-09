@@ -11,7 +11,10 @@ import { LocalDataService } from './local-data.service';
 export class FileService {
   apiUrl: string = environment.apiUrl;
 
-  constructor(protected sanitizer: DomSanitizer) {}
+  constructor(
+    protected sanitizer: DomSanitizer,
+    private localDataService: LocalDataService
+  ) {}
 
   fromBase64ToFile = (fileData: CustomFile): SafeResourceUrl => {
     const safeFile: SafeResourceUrl =
@@ -49,7 +52,7 @@ export class FileService {
     fileData: CustomFile,
     projectId: string
   ): Promise<any> => {
-    const accessToken: string = LocalDataService.getAccessToken();
+    const accessToken: string = this.localDataService.getAccessToken();
     const url: string = `${this.apiUrl}/core/files/project/main/${projectId}`;
     const response: any = await axios.post(url, fileData, {
       headers: {
@@ -64,7 +67,7 @@ export class FileService {
     fileData: CustomFile,
     projectId: string
   ): Promise<any> => {
-    const accessToken: string = LocalDataService.getAccessToken();
+    const accessToken: string = this.localDataService.getAccessToken();
     const url: string = `${this.apiUrl}/core/files/project/extra/${projectId}`;
     const response: any = await axios.post(url, fileData, {
       headers: {
@@ -76,7 +79,7 @@ export class FileService {
   };
 
   deleteFile = async (fileId: string): Promise<any> => {
-    const accessToken: string = LocalDataService.getAccessToken();
+    const accessToken: string = this.localDataService.getAccessToken();
     const url: string = `${this.apiUrl}/core/files/${fileId}`;
     const response: any = await axios.delete(url, {
       headers: {

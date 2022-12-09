@@ -1,0 +1,61 @@
+<h1 mat-dialog-title>Agregar actualización</h1>
+<div mat-dialog-content>
+  <form [formGroup]="updateForm">
+    <mat-form-field appearance="outline" style="width: 100%">
+      <mat-label>Título</mat-label>
+      <input matInput formControlName="title" />
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" style="width: 100%">
+      <mat-label>Descripción</mat-label>
+      <textarea
+        matInput
+        cdkTextareaAutosize
+        cdkAutosizeMinRows="2"
+        cdkAutosizeMaxRows="5"
+        formControlName="description"
+      ></textarea>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" style="width: 100%">
+      <mat-label>Fecha</mat-label>
+      <input
+        matInput
+        [matDatepicker]="picker1"
+        formControlName="date"
+        [disabled]="true"
+      />
+      <mat-hint>MM/DD/YYYY</mat-hint>
+      <mat-datepicker-toggle
+        matIconSuffix
+        [for]="picker1"
+      ></mat-datepicker-toggle>
+      <mat-datepicker #picker1 disabled="false"></mat-datepicker>
+    </mat-form-field>
+  </form>
+</div>
+<div mat-dialog-actions>
+  <div
+    style="
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+      padding: 0.5rem;
+      flex: 1;
+    "
+  >
+    <mat-spinner *ngIf="loading" diameter="20"></mat-spinner>
+  </div>
+  <button mat-button (click)="onNoClick()" [disabled]="loading">
+    Cancelar
+  </button>
+  <button
+    mat-raised-button
+    color="primary"
+    (click)="save()"
+    [disabled]="loading"
+    cdkFocusInitial
+  >
+    Guardar
+  </button>
+</div>

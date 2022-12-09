@@ -1,0 +1,54 @@
+<div class="as-header">
+  <h1 *ngIf="!project || !project.name">Bitácora del proyecto</h1>
+  <h1 *ngIf="project && project.name">Bitácora — {{ project.name }}</h1>
+  <div>
+    <button
+      primary
+      mat-flat-button
+      color="primary"
+      [disabled]="loading"
+      (click)="openDialog()"
+    >
+      Agregar registro
+    </button>
+  </div>
+</div>
+
+<mat-card
+  *ngIf="loading"
+  class="mat-elevation-z0"
+  style="
+    min-height: 45vh;
+    min-width: 300px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  "
+>
+  <mat-spinner *ngIf="loading" diameter="50"></mat-spinner>
+</mat-card>
+
+<mat-card *ngIf="!loading" class="mat-elevation-z0">
+  <h2>Seguimiento de proyecto</h2>
+  <div
+    class="project-update"
+    *ngFor="let update of updates; let i = index"
+    (click)="openEditDialog(update)"
+  >
+    <div class="header">
+      <div class="title">{{ update.title }}</div>
+      <div class="date">{{ update.date | date : "dd/MM/yyyy" }}</div>
+    </div>
+    <div class="description">{{ update.description }}</div>
+    <mat-divider *ngIf="updates.length != i + 1"></mat-divider>
+  </div>
+  <mat-paginator
+    [length]="totalItems"
+    [pageSize]="limit"
+    [pageSizeOptions]="[5, 10, 25, 100]"
+    [pageIndex]="page - 1"
+    (page)="handlePageEvent($event)"
+    aria-label="Select page"
+  >
+  </mat-paginator>
+</mat-card>

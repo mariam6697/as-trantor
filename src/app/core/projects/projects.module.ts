@@ -6,7 +6,7 @@ import { ProjectDetailComponent } from './project-detail/project-detail.componen
 import { ProjectDialogComponent } from './project-dialog/project-dialog.component';
 import { ProjectsComponent } from './projects.component';
 import { NgxMatFileInputModule } from '@angular-material-components/file-input';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatChipsModule } from '@angular/material/chips';
@@ -40,6 +40,8 @@ import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
 
 import { MainDetailsComponent } from './project-detail/main-details/main-details.component';
 import { ImagesComponent } from './project-detail/images/images.component';
@@ -47,6 +49,10 @@ import { ProjectCategoriesComponent } from './project-detail/project-categories/
 import { SourceCodeComponent } from './project-detail/source-code/source-code.component';
 import { RepoComponent } from './project-detail/source-code/repo/repo.component';
 import { DeleteRepoDialogComponent } from './project-detail/source-code/delete-repo-dialog/delete-repo-dialog.component';
+import { UpdatesComponent } from './updates/updates.component';
+import { UpdateDialogComponent } from './updates/update-dialog/update-dialog.component';
+import { MatDividerModule } from '@angular/material/divider';
+import { EditDialogComponent } from './updates/edit-dialog/edit-dialog.component';
 
 @NgModule({
   declarations: [
@@ -64,6 +70,9 @@ import { DeleteRepoDialogComponent } from './project-detail/source-code/delete-r
     SourceCodeComponent,
     RepoComponent,
     DeleteRepoDialogComponent,
+    UpdatesComponent,
+    UpdateDialogComponent,
+    EditDialogComponent,
   ],
   imports: [
     CommonModule,
@@ -103,6 +112,11 @@ import { DeleteRepoDialogComponent } from './project-detail/source-code/delete-r
     MatCheckboxModule,
     MatProgressBarModule,
     MatTooltipModule,
+    MatSlideToggleModule,
+    FormsModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    MatDividerModule,
   ],
 })
 export class ProjectsModule {}

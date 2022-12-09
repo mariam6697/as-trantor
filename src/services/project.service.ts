@@ -10,10 +10,10 @@ import { LocalDataService } from './local-data.service';
 export class ProjectService {
   apiUrl: string = environment.apiUrl;
 
-  constructor() {}
+  constructor(private localDataService: LocalDataService) {}
 
   create = async (projectData: Project): Promise<any> => {
-    const accessToken: string = LocalDataService.getAccessToken();
+    const accessToken: string = this.localDataService.getAccessToken();
     const url: string = `${this.apiUrl}/core/projects`;
     const response: any = await axios.post(url, projectData, {
       headers: {
@@ -25,7 +25,7 @@ export class ProjectService {
   };
 
   get = async (projectId: string): Promise<Project> => {
-    const accessToken: string = LocalDataService.getAccessToken();
+    const accessToken: string = this.localDataService.getAccessToken();
     const url: string = `${this.apiUrl}/admin/projects/${projectId}`;
     const response: any = await axios.get(url, {
       headers: {
@@ -41,7 +41,7 @@ export class ProjectService {
     limit: number,
     search?: string
   ): Promise<any> => {
-    const accessToken: string = LocalDataService.getAccessToken();
+    const accessToken: string = this.localDataService.getAccessToken();
     let url: string = `${this.apiUrl}/admin/projects?page=${page}&limit=${limit}`;
     if (search) {
       url += `&search=${search}`;
@@ -55,7 +55,7 @@ export class ProjectService {
   };
 
   update = async (projectId: string, projectData: Project): Promise<any> => {
-    const accessToken: string = LocalDataService.getAccessToken();
+    const accessToken: string = this.localDataService.getAccessToken();
     const url: string = `${this.apiUrl}/core/projects/${projectId}`;
     const response: any = await axios.put(url, projectData, {
       headers: {

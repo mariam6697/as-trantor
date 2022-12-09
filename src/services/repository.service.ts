@@ -10,30 +10,33 @@ import { LocalDataService } from './local-data.service';
 })
 export class RepositoryService {
   apiUrl: string = environment.apiUrl;
-  constructor() {}
+  constructor(private localDataService: LocalDataService) {}
 
   create = async (
     projectId: string,
+    label: string,
+    privateRepo: boolean,
     files: RemoteFile[]
   ): Promise<Repository> => {
-    const accessToken: string = LocalDataService.getAccessToken();
+    const body: any = {
+      files,
+      label,
+      private: privateRepo,
+    };
+    const accessToken: string = this.localDataService.getAccessToken();
     const url: string = `${this.apiUrl}/core/repositories/${projectId}`;
-    const response: any = await axios.post(
-      url,
-      { files },
-      {
-        headers: {
-          Authorization: `Bearer ${accessToken}`,
-        },
-      }
-    );
+    const response: any = await axios.post(url, body, {
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+      },
+    });
     const data: Repository = response.data.data;
     return data;
   };
 
-  get = async (projectId: string): Promise<Repository[]> => {
-    const accessToken: string = LocalDataService.getAccessToken();
-    const url: string = `${this.apiUrl}/core/repositories/project/${projectId}`;
+  get = async (projectNanoId: string): Promise<Repository[]> => {
+    const accessToken: string = this.localDataService.getAccessToken();
+    const url: string = `${this.apiUrl}/core/repositories/project/${projectNanoId}`;
     const response: any = await axios.get(url, {
       headers: {
         Authorization: `Bearer ${accessToken}`,
@@ -44,7 +47,7 @@ export class RepositoryService {
   };
 
   delete = async (repoId: string): Promise<void> => {
-    const accessToken: string = LocalDataService.getAccessToken();
+    const accessToken: string = this.localDataService.getAccessToken();
     const url: string = `${this.apiUrl}/core/repositories/${repoId}`;
     await axios.delete(url, {
       headers: {

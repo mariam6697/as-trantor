@@ -33,7 +33,7 @@ export class LocalDataService {
     localStorage.clear();
   };
 
-  static getAccessToken = (): string => {
+  getAccessToken = (): string => {
     const data: any = localStorage.getItem('user');
     const user: any = JSON.parse(data);
     if (user && user.accessToken) {

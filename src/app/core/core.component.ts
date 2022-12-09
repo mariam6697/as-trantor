@@ -31,8 +31,8 @@ export class CoreComponent implements OnInit {
 
   constructor(
     private userService: UserService,
-    private localDataService: LocalDataService,
-    private router: Router
+    private router: Router,
+    private localDataService: LocalDataService
   ) {}
 
   ngOnInit(): void {
@@ -58,7 +58,14 @@ export class CoreComponent implements OnInit {
   };
 
   logout = (): void => {
-    this.localDataService.deleteAll();
-    this.router.navigate(['../../auth/login']);
+    this.userService.logout();
+  };
+
+  goToRepo = (): void => {
+    window.open(
+      'https://github.com/mariam6697/as-trantor',
+      '_blank',
+      'noopener,noreferrer'
+    );
   };
 }

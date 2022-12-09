@@ -1,13 +1,20 @@
-.repo {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  .repo-data {
+.repo-container {
+  padding: 8px 16px;
+  margin-bottom: 8px;
+  .repo {
     display: flex;
     flex-direction: row;
-    align-items: center;
+    justify-content: space-between;
+    .repo-data {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
 
-    .repo-name {
+      .repo-name {
+        font-size: 1.005rem;
+        font-family: "Courier New", Courier, monospace;
+        font-weight: 700;
+      }
     }
   }
 }
