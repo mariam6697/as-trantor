@@ -17,8 +17,9 @@ import { UpdatesService } from 'src/services/updates.service';
   styleUrls: ['./edit-dialog.component.scss'],
 })
 export class EditDialogComponent implements OnInit {
-  updateForm: FormGroup;
+  editForm: FormGroup;
   _loading: boolean = false;
+  update: ProjectUpdate = {} as ProjectUpdate;
 
   constructor(
     public dialogRef: MatDialogRef<UsersComponent>,
@@ -28,12 +29,13 @@ export class EditDialogComponent implements OnInit {
     private _snackBar: MatSnackBar
   ) {
     let date: Date = new Date(data.update.date);
-    this.updateForm = this.fb.group({
-      title: new FormControl<string>(data.update.title, [
+    this.update = data.update;
+    this.editForm = this.fb.group({
+      title: new FormControl<string>(this.update.title, [
         Validators.required,
         Validators.minLength(5),
       ]),
-      description: new FormControl<string>(data.update.description, [
+      description: new FormControl<string>(this.update.description, [
         Validators.required,
         Validators.minLength(5),
       ]),
@@ -49,46 +51,50 @@ export class EditDialogComponent implements OnInit {
     this._loading = value;
 
     if (this._loading) {
-      this.updateForm.disable();
+      this.editForm.disable();
     } else {
-      this.updateForm.enable();
+      this.editForm.enable();
     }
   }
 
   ngOnInit(): void {}
 
-  onNoClick = (): void => {
+  onClose = (): void => {
     this.dialogRef.close();
   };
 
-  save = async (): Promise<void> => {
-    if (this.updateForm.valid) {
+  updateRecord = async (): Promise<void> => {
+    if (this.editForm.valid) {
       try {
         this.loading = true;
-        const updateData: ProjectUpdate = {
-          ...this.updateForm.value,
+        const updatedRecord: ProjectUpdate = {
+          ...this.editForm.value,
         };
-        await this.updatesService.update(this.data.update._id, updateData);
-        this.dialogRef.close();
+        await this.updatesService.update(this.update._id!, updatedRecord);
+        this.onClose();
       } catch (error: any) {
-        this._snackBar.open('Ocurrió un error al crear el registro', 'Cerrar', {
-          horizontalPosition: 'end',
-          verticalPosition: 'bottom',
-        });
+        this._snackBar.open(
+          'Ocurrió un error al actualizar el registro',
+          'Cerrar',
+          {
+            horizontalPosition: 'end',
+            verticalPosition: 'bottom',
+          }
+        );
       } finally {
         this.loading = false;
       }
     } else {
-      this.updateForm.markAllAsTouched();
+      this.editForm.markAllAsTouched();
     }
   };
 
   onDelete = async (): Promise<void> => {
-    if (this.updateForm.valid) {
+    if (this.editForm.valid) {
       try {
         this.loading = true;
         await this.updatesService.remove(this.data.update._id);
-        this.dialogRef.close();
+        this.onClose();
       } catch (error: any) {
         this._snackBar.open(
           'Ocurrió un error al eliminar el registro',
@@ -102,7 +108,7 @@ export class EditDialogComponent implements OnInit {
         this.loading = false;
       }
     } else {
-      this.updateForm.markAllAsTouched();
+      this.editForm.markAllAsTouched();
     }
   };
 }

@@ -1,6 +1,6 @@
 <h1 mat-dialog-title>Editar registro</h1>
 <div mat-dialog-content>
-  <form [formGroup]="updateForm">
+  <form [formGroup]="editForm">
     <mat-form-field appearance="outline" style="width: 100%">
       <mat-label>Título</mat-label>
       <input matInput formControlName="title" />
@@ -21,16 +21,16 @@
       <mat-label>Fecha</mat-label>
       <input
         matInput
-        [matDatepicker]="picker1"
+        [matDatepicker]="picker"
         formControlName="date"
         [disabled]="true"
       />
       <mat-hint>MM/DD/YYYY</mat-hint>
       <mat-datepicker-toggle
         matIconSuffix
-        [for]="picker1"
+        [for]="picker"
       ></mat-datepicker-toggle>
-      <mat-datepicker #picker1 disabled="false"></mat-datepicker>
+      <mat-datepicker #picker disabled="false"></mat-datepicker>
     </mat-form-field>
   </form>
 </div>
@@ -46,16 +46,14 @@
   >
     <mat-spinner *ngIf="loading" diameter="20"></mat-spinner>
   </div>
-  <button mat-button (click)="onNoClick()" [disabled]="loading">
-    Cancelar
-  </button>
+  <button mat-button (click)="onClose()" [disabled]="loading">Cancelar</button>
   <button mat-button color="warn" (click)="onDelete()" [disabled]="loading">
     Eliminar
   </button>
   <button
     mat-raised-button
     color="primary"
-    (click)="save()"
+    (click)="updateRecord()"
     [disabled]="loading"
     cdkFocusInitial
   >
