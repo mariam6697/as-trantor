@@ -58,4 +58,14 @@ export class CategoryService {
     const data: any = response.data;
     return data;
   };
+
+  remove = async (categoryId: string): Promise<void> => {
+    const accessToken: string = this.localDataService.getAccessToken();
+    const url: string = `${this.apiUrl}/core/categories/${categoryId}`;
+    await axios.delete(url, {
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+      },
+    });
+  };
 }

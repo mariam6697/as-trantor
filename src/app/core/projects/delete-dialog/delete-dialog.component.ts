@@ -2,10 +2,8 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import Project from 'src/models/project.model';
-import User from 'src/models/user.model';
 import { ProjectService } from 'src/services/project.service';
-import { UserService } from 'src/services/user.service';
-import { UsersComponent } from '../../users/users.component';
+import { ProjectsComponent } from '../projects.component';
 
 @Component({
   selector: 'app-delete-dialog',
@@ -14,13 +12,11 @@ import { UsersComponent } from '../../users/users.component';
 })
 export class DeleteDialogComponent implements OnInit {
   _loading: boolean = false;
-  user: User;
   project: Project;
 
   constructor(
-    public dialogRef: MatDialogRef<UsersComponent>,
+    public dialogRef: MatDialogRef<ProjectsComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
-    private userService: UserService,
     private projectService: ProjectService,
     private _snackBar: MatSnackBar
   ) {
