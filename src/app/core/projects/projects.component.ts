@@ -6,6 +6,7 @@ import { Router } from '@angular/router';
 import Project from 'src/models/project.model';
 import { LocalDataService } from 'src/services/local-data.service';
 import { ProjectService } from 'src/services/project.service';
+import { DeleteDialogComponent } from './delete-dialog/delete-dialog.component';
 import { ProjectDialogComponent } from './project-dialog/project-dialog.component';
 
 @Component({
@@ -95,5 +96,19 @@ export class ProjectsComponent implements OnInit {
 
   goToDetail = (project: Project): void => {
     this.router.navigate([`projects/updates/${project._id}`]);
+  };
+
+  openDeleteDialog = (project: Project): void => {
+    const dialogRef = this._dialog.open(DeleteDialogComponent, {
+      width: '400px',
+      data: {
+        project,
+      },
+      disableClose: true,
+    });
+
+    dialogRef.afterClosed().subscribe(() => {
+      this.getProjects(this.page, this.limit);
+    });
   };
 }

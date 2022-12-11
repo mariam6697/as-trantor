@@ -65,4 +65,14 @@ export class ProjectService {
     const data: any = response.data;
     return data;
   };
+
+  remove = async (projectId: string): Promise<void> => {
+    const accessToken: string = this.localDataService.getAccessToken();
+    const url: string = `${this.apiUrl}/core/projects/${projectId}`;
+    await axios.delete(url, {
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+      },
+    });
+  };
 }

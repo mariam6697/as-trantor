@@ -53,6 +53,7 @@ import { UpdatesComponent } from './updates/updates.component';
 import { UpdateDialogComponent } from './updates/update-dialog/update-dialog.component';
 import { MatDividerModule } from '@angular/material/divider';
 import { EditDialogComponent } from './updates/edit-dialog/edit-dialog.component';
+import { DeleteDialogComponent } from './delete-dialog/delete-dialog.component';
 
 @NgModule({
   declarations: [
@@ -73,6 +74,7 @@ import { EditDialogComponent } from './updates/edit-dialog/edit-dialog.component
     UpdatesComponent,
     UpdateDialogComponent,
     EditDialogComponent,
+    DeleteDialogComponent,
   ],
   imports: [
     CommonModule,
