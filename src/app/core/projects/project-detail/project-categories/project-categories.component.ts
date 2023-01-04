@@ -98,9 +98,9 @@ export class ProjectCategoriesComponent implements OnInit {
   };
 
   saveCategories = async (categories: string[]): Promise<void> => {
-    await this.projectService.update(this.project._id!, {
-      categories,
-    } as Project);
+    let data: Project = { ...this.project };
+    data.categories = categories;
+    await this.projectService.update(this.project._id!, data);
     await this.getProjectData();
   };
 
